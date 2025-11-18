@@ -1,11 +1,43 @@
 <!DOCTYPE html>
-<html>
-  <head>
+<html lang="ko">
+<head>
     <meta charset="UTF-8">
-    <title>My Website</title>
-  </head>
-  <body>
-    <h1>SDMC ECO Management</h1>
-    <p>여기에 원하는 내용을 넣으면 됩니다.</p>
-  </body>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SDMC-ECO | 에너지 사용 현황</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header class="eco-header">
+        <h1>🌳 SDMC-ECO 에너지 관리 현황</h1>
+        <p>사업소별 년도/월별 에너지 사용량 및 요금 데이터</p>
+    </header>
+
+    <div class="container">
+        <div class="controls">
+            <label for="site-select">사업소 선택:</label>
+            <select id="site-select" onchange="showData(this.value)">
+                <option value="공단청사">공단청사</option>
+                <option value="성동종합행정마을">성동종합행정마을</option>
+                <option value="서울숲복합문화체육센터">서울숲복합문화체육센터</option>
+            </select>
+            <label for="year-select">년도 선택:</label>
+            <select id="year-select" onchange="showData(document.getElementById('site-select').value)">
+                <option value="2024">2024년</option>
+                <option value="2023">2023년</option>
+            </select>
+        </div>
+        
+        <section id="data-display">
+            </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 SDMC 에너지 관리 시스템</p>
+    </footer>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+</body>
 </html>
