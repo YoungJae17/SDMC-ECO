@@ -3,46 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SDMC-ECO | 에너지 및 탄소 현황</title>
+    <title>SDMC-ECO 에너지/탄소 현황</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;700&display=swap" rel="stylesheet">
 </head>
-<body>
-
+<body onload="showData()"> 
+    
     <header class="eco-header">
         <h1>🌳 SDMC-ECO 에너지/탄소 현황</h1>
         <p>사업소별 년도/월별 에너지 사용량, 요금 및 탄소배출량</p>
     </header>
 
-    <div class="container">
-        <div class="controls">
-            <label for="site-select">사업소 선택:</label>
-            <select id="site-select" onchange="showData()">
-                <option value="공단청사">공단청사</option>
-                <option value="성동종합행정마을">성동종합행정마을</option>
-                <option value="서울숲복합문화체육센터">서울숲복합문화체육센터</option>
+    <div class="controls">
+        <label for="site-select">사업소 선택:</label>
+        <select id="site-select" onchange="showData()">
+            <option value="공단청사">공단청사</option>
             </select>
-            <label for="year-select">년도 선택:</label>
-            <select id="year-select" onchange="showData()">
-                <option value="2024">2024년</option>
-                <option value="2023">2023년</option>
+        <label for="year-select">년도 선택:</label>
+        <select id="year-select" onchange="showData()">
+            <option value="2024">2024년</option>
             </select>
-        </div>
-        
-        <div class="info-text">
-            * 탄소배출량(tCO2eq)은 전기 및 가스 사용량을 기준으로 산정된 값입니다.
-        </div>
-        
-        <section id="data-display">
-            <div class="loading-message">데이터를 불러오는 중...</div>
-        </section>
     </div>
+    
+    <section id="data-display">
+        </section>
 
-    <footer>
-        <p>&copy; 2025 SDMC 에너지 관리 시스템 feat. yj</p>
-    </footer>
-
-    <script src="data.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
