@@ -18,7 +18,7 @@ function formatNumber(num) {
 
 // 🌟 Supabase에서 데이터를 가져와 화면에 표시하는 함수
 async function showData() {
-    const site = document.getElementById('site-select').value;
+    const site = document.getElementById('site-select').value.trim();
     
     // 💡 해결: data_year 컬럼이 DB에 정수(int4)로 저장되어 있으므로,
     // HTML에서 가져온 문자열 값('2024')을 정수(2024)로 변환합니다.
