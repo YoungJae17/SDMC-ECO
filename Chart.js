@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SDMC-ECO 차트 분석</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+    
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+<body> 
+    
+    <header class="eco-header">
+        <h1>📈 SDMC-ECO 차트 분석</h1>
+        <p>사업소별 월별 에너지 사용량 및 탄소배출량 추이</p>
+    </header>
+
+    <div class="container">
+        <div class="page-navigation">
+            <button onclick="location.href='index.html'">테이블 현황</button>
+            <button class="active-button">차트 분석</button>
+        </div>
+
+        <div class="controls">
+            <label for="site-select">사업소 선택:</label>
+            <select id="site-select">
+                <option value="공단청사">공단청사</option>
+                <option value="성동종합행정마을">성동종합행정마을</option>
+                </select>
+            <label for="year-select">년도 선택:</label>
+            <select id="year-select">
+                <option value="2024">2024년</option>
+                <option value="2023">2023년</option>
+                <option value="2022">2022년</option>
+                <option value="2021">2021년</option>
+                <option value="2020">2020년</option>
+            </select>
+        </div>
+        
+        <section id="chart-display">
+            <canvas id="energyChart"></canvas>
+            <div id="chart-error" class="loading-message" style="display:none;"></div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 SDMC-ECO Data Dashboard. Powered by Supabase & Chart.js.</p>
+    </footer>
+
+    <script src="chart_script.js"></script> 
+</body>
+</html>
