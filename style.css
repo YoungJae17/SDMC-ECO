@@ -1,17 +1,24 @@
-/* CSS 변수 정의 */
+/* style.css - 최종 버전 */
+
+/* ==================================== */
+/* 1. CSS 변수 (Variable Definitions) */
+/* ==================================== */
 :root {
-    --color-primary: #38761d;
-    --color-secondary: #93c47d;
-    --color-background: #f1f8e9;
-    --color-text: #333;
-    --color-border: #ccc;
-    --color-table-header: #e0e0e0;
-    --color-table-row-hover: #f9f9f9;
+    --color-primary: #38761d; /* 짙은 녹색 - 헤더, 주요 버튼 */
+    --color-secondary: #93c47d; /* 연한 녹색 - 강조, 호버 배경 */
+    --color-background: #f1f8e9; /* 아주 연한 녹색 배경 */
+    --color-text: #333; /* 기본 텍스트 색상 */
+    --color-border: #ccc; /* 일반 경계선 색상 */
+    --color-table-header: #e0e0e0; /* 테이블 헤더 배경색 */
+    --color-table-row-hover: #f9f9f9; /* 테이블 행 호버 배경색 */
 }
 
-/* 기본 스타일 */
+/* ==================================== */
+/* 2. 기본 스타일 (Base Styles) */
+/* ==================================== */
 * {
     box-sizing: border-box;
+    /* 모든 요소의 마진과 패딩을 초기화하여 브라우저 기본값 간섭 방지 */
     margin: 0;
     padding: 0;
 }
@@ -23,18 +30,16 @@ body {
     line-height: 1.6;
 }
 
-/* 헤더 스타일 - 마진 상쇄 방지 적용 */
+/* ==================================== */
+/* 3. 헤더 스타일 (Header Styles) */
+/* ==================================== */
 .eco-header {
     background-color: var(--color-primary);
     color: white;
     padding: 20px 0;
     text-align: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    /* 마진 상쇄 방지 */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
+    /* 컨테이너보다 높은 z-index로 그림자가 위로 표시되도록 보장 */
     position: relative; 
     z-index: 10;
 }
@@ -45,26 +50,30 @@ body {
     font-size: 28px;
 }
 
-/* 컨테이너 스타일 - 상단 여백 강제 제거 */
+/* ==================================== */
+/* 4. 컨테이너 스타일 (Container) - 상단 마진 강제 제거 */
+/* ==================================== */
 .container {
     width: 95%; 
     max-width: 1300px; 
     
-    /* 상단 여백 제거: -100px 마진 적용 */
-    margin-top: -100px; 
+    /* 🌟 상단 공백 제거: 음수 마진을 -50px로 설정하여 어떤 상황에서도 헤더에 붙도록 강제 */
+    margin-top: -50px; 
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 30px; 
+    margin-bottom: 30px; /* 하단 여백은 유지 */
 
     padding: 20px;
-    position: relative; 
+    position: relative; /* z-index 적용을 위해 필요 */
     z-index: 5;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 
-/* 페이지 이동 버튼 스타일 */
+/* ==================================== */
+/* 5. 페이지 이동 버튼 스타일 (Tab Navigation) */
+/* ==================================== */
 .page-navigation {
     margin-bottom: 20px;
     border-bottom: 2px solid var(--color-border);
@@ -96,7 +105,9 @@ body {
     font-weight: 700;
 }
 
-/* 컨트롤 요소 스타일 */
+/* ==================================== */
+/* 6. 컨트롤 요소 스타일 (Select/Dropdown) */
+/* ==================================== */
 .controls {
     display: flex;
     gap: 15px;
@@ -124,7 +135,10 @@ body {
     outline: none;
 }
 
-/* 테이블 스타일 */
+/* ==================================== */
+/* 7. 테이블 스타일 (Data Table) - 가독성 향상 */
+/* ==================================== */
+
 .table-title {
     font-size: 18px;
     font-weight: 700;
@@ -134,7 +148,9 @@ body {
     color: var(--color-primary);
 }
 
+/* 테이블을 감싸는 부모 요소에 스크롤 기능을 추가 (모바일 반응형 대비) */
 #data-display {
+    /* 기본적으로는 보이지 않지만, 모바일 미디어 쿼리에서 활성화 */
     overflow-x: hidden; 
 }
 
@@ -145,6 +161,7 @@ body {
     font-size: 14px; 
 }
 
+/* 테이블 셀 (th, td) 경계선 추가 */
 .data-table th,
 .data-table td {
     border: 1px solid var(--color-border);
@@ -152,6 +169,7 @@ body {
     text-align: right; 
 }
 
+/* 테이블 헤더 (th) 스타일 강조 */
 .data-table thead th {
     background-color: var(--color-table-header);
     color: var(--color-text);
@@ -160,23 +178,30 @@ body {
     vertical-align: middle; 
 }
 
+/* 첫 번째 열 (월, 구분 등) 스타일 */
 .data-table tbody td:first-child {
     text-align: center; 
     background-color: var(--color-background);
     font-weight: 500;
 }
 
+/* 행 호버 효과 (마우스 올렸을 때 강조) */
 .data-table tbody tr:hover {
     background-color: var(--color-table-row-hover);
     cursor: default; 
 }
 
-/* 모바일 반응형 스타일 */
+/* ==================================== */
+/* 8. 모바일 반응형 스타일 (Media Queries) */
+/* ==================================== */
+
+/* 화면 너비가 768px 이하일 때 적용 (태블릿 세로, 스마트폰 가로/세로) */
 @media (max-width: 768px) {
     
+    /* 1. 기본 레이아웃 조정 */
     .container {
         width: 100%; 
-        margin: -20px 0 10px 0; 
+        margin: -20px 0 10px 0; /* 모바일에서도 음수 마진으로 강제 조정 */
         padding: 10px;
         border-radius: 0; 
         box-shadow: none; 
@@ -186,8 +211,9 @@ body {
         font-size: 22px; 
     }
     
+    /* 2. 컨트롤 및 버튼 조정 */
     .controls {
-        flex-direction: column; 
+        flex-direction: column; /* 선택 박스를 세로로 정렬 */
         align-items: flex-start;
         gap: 5px;
         margin-bottom: 10px;
@@ -207,11 +233,15 @@ body {
         flex-grow: 1; 
     }
     
+    /* 3. 테이블 가독성 향상 (핵심 수정) */
+    
+    /* 테이블을 가로로 스크롤할 수 있도록 부모 요소를 만듭니다. */
     #data-display {
-        overflow-x: auto; 
-        -webkit-overflow-scrolling: touch; 
+        overflow-x: auto; /* 가로 스크롤 활성화 */
+        -webkit-overflow-scrolling: touch; /* iOS 부드러운 스크롤 */
     }
     
+    /* 테이블 자체의 최소 너비를 설정하여 내용이 찌그러지지 않게 합니다. */
     .data-table {
         min-width: 700px; 
         margin-top: 10px;
