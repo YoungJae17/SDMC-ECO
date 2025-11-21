@@ -58,7 +58,7 @@ body {
     max-width: 1300px; 
     
     /* 🌟 상단 공백 제거: 음수 마진을 -50px로 설정하여 어떤 상황에서도 헤더에 붙도록 강제 */
-    margin-top: -100px; 
+    margin-top: -50px; 
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 30px; /* 하단 여백은 유지 */
