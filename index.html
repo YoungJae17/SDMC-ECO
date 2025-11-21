@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;500;700&display=swap" rel="stylesheet">
 </head>
-<body>  
+<body>  
     
     <header class="eco-header">
         <h1>🌳 SDMC-ECO 에너지/탄소 현황</h1>
@@ -23,7 +23,7 @@
             <button onclick="location.href='chart.html'">차트 분석</button>
         </div>
         
-        <div class="controls select-group">
+        <div class="controls">
             <label for="site-select">사업소 선택:</label>
             <select id="site-select">
                 <option value="공단청사">공단청사</option>
@@ -51,30 +51,7 @@
         </div>
         
         <section id="data-display">
-            <div class="table-title">공단청사 (2024년) 월별 에너지 및 탄소 배출 현황</div>
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th rowspan="2">월</th>
-                        <th colspan="2">전기</th>
-                        <th colspan="2">가스</th>
-                        <th rowspan="2">탄소배출량<br>(tCO2eq)</th>
-                    </tr>
-                    <tr>
-                        <th>사용량(kWh)</th>
-                        <th>요금(원)</th>
-                        <th>사용량(MJ)</th>
-                        <th>요금(원)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>1월</td><td>12,500</td><td>1,500,000</td><td>800</td><td>650,000</td><td>12.5</td></tr>
-                    <tr><td>2월</td><td>11,800</td><td>1,450,000</td><td>750</td><td>600,000</td><td>11.9</td></tr>
-                    <tr><td>3월</td><td>10,500</td><td>1,300,000</td><td>500</td><td>450,000</td><td>9.5</td></tr>
-                    <tr><td>4월</td><td>9,800</td><td>1,200,000</td><td>300</td><td>300,000</td><td>8.1</td></tr>
-                    </tbody>
-            </table>
-            </section>
+        </section>
     </div>
 
     <footer>
