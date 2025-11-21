@@ -4,134 +4,123 @@
 /* 1. CSS 변수 (Variable Definitions) */
 /* ==================================== */
 :root {
-    --color-primary: #38761d; /* 짙은 녹색 - 헤더, 주요 버튼 */
-    --color-secondary: #93c47d; /* 연한 녹색 - 강조, 호버 배경 */
-    --color-background: #f1f8e9; /* 아주 연한 녹색 배경 */
-    --color-text: #333; /* 기본 텍스트 색상 */
-    --color-border: #ccc; /* 일반 경계선 색상 */
-    --color-table-header: #e0e0e0; /* 테이블 헤더 배경색 */
-    --color-table-row-hover: #f9f9f9; /* 테이블 행 호버 배경색 */
+    --color-primary: #38761d; /* 짙은 녹색 - 헤더, 주요 버튼 */
+    --color-secondary: #93c47d; /* 연한 녹색 - 강조, 호버 배경 */
+    --color-background: #f1f8e9; /* 아주 연한 녹색 배경 */
+    --color-text: #333; /* 기본 텍스트 색상 */
+    --color-border: #ccc; /* 일반 경계선 색상 */
+    --color-table-header: #e0e0e0; /* 테이블 헤더 배경색 */
+    --color-table-row-hover: #f9f9f9; /* 테이블 행 호버 배경색 */
 }
 
 /* ==================================== */
 /* 2. 기본 스타일 (Base Styles) */
 /* ==================================== */
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-    font-family: 'Noto Sans KR', sans-serif, Arial, sans-serif;
-    background-color: var(--color-background);
-    color: var(--color-text);
-    line-height: 1.6;
+    font-family: 'Noto Sans KR', sans-serif, Arial, sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    line-height: 1.6;
 }
 
 /* ==================================== */
 /* 3. 헤더 스타일 (Header Styles) */
 /* ==================================== */
 .eco-header {
-    background-color: var(--color-primary);
-    color: white;
-    padding: 20px 0;
-    text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    /* 컨테이너가 겹쳐 올라올 때 그림자 효과가 가려지지 않도록 z-index 추가 */
-    position: relative; 
-    z-index: 10;
+    background-color: var(--color-primary);
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .eco-header h1 {
-    font-weight: 700;
-    margin-bottom: 5px;
-    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 5px;
+    font-size: 28px;
 }
 
 /* ==================================== */
-/* 4. 컨테이너 스타일 (Container) - 상단 마진 강제 제거 */
+/* 4. 컨테이너 스타일 (Container) */
 /* ==================================== */
 .container {
-    width: 95%; 
-    max-width: 1300px; 
-    
-    /* 🌟 핵심 수정: 음수 마진을 사용해 컨테이너를 위로 끌어올립니다. */
-    margin-top: -30px; /* 컨테이너를 위로 30px 이동하여 공백 제거 */
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 30px; /* 하단 여백은 유지 */
-
-    padding: 20px;
-    position: relative; /* 레이어 순서 조정을 위한 position 지정 */
-    z-index: 5;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    width: 95%; 
+    max-width: 1300px; 
+    margin: 0px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 
 /* ==================================== */
 /* 5. 페이지 이동 버튼 스타일 (Tab Navigation) */
 /* ==================================== */
 .page-navigation {
-    margin-bottom: 20px;
-    border-bottom: 2px solid var(--color-border);
-    padding-bottom: 15px;
-    display: flex;
-    gap: 10px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--color-border);
+    padding-bottom: 15px;
+    display: flex;
+    gap: 10px;
 }
 
 .page-navigation button {
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: 500;
-    cursor: pointer;
-    border: 1px solid var(--color-primary);
-    background-color: white;
-    color: var(--color-primary);
-    border-radius: 5px;
-    transition: all 0.2s;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid var(--color-primary);
+    background-color: white;
+    color: var(--color-primary);
+    border-radius: 5px;
+    transition: all 0.2s;
 }
 
 .page-navigation button:hover:not(.active-button) {
-    background-color: var(--color-secondary);
-    color: white;
+    background-color: var(--color-secondary);
+    color: white;
 }
 
 .page-navigation .active-button {
-    background-color: var(--color-primary);
-    color: white;
-    font-weight: 700;
+    background-color: var(--color-primary);
+    color: white;
+    font-weight: 700;
 }
 
 /* ==================================== */
 /* 6. 컨트롤 요소 스타일 (Select/Dropdown) */
 /* ==================================== */
 .controls {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 15px;
-    align-items: center;
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+    align-items: center;
 }
 
 .controls label {
-    font-weight: 500;
-    margin-right: 5px;
+    font-weight: 500;
+    margin-right: 5px;
 }
 
 .controls select {
-    padding: 12px 15px;
-    border: 1px solid var(--color-border);
-    border-radius: 4px;
-    background-color: white;
-    font-size: 14px;
-    cursor: pointer;
-    transition: border-color 0.2s;
+    padding: 12px 15px;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    background-color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: border-color 0.2s;
 }
 
 .controls select:focus {
-    border-color: var(--color-primary);
-    outline: none;
+    border-color: var(--color-primary);
+    outline: none;
 }
 
 /* ==================================== */
@@ -139,56 +128,57 @@ body {
 /* ==================================== */
 
 .table-title {
-    font-size: 18px;
-    font-weight: 700;
-    margin-bottom: 15px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid var(--color-secondary);
-    color: var(--color-primary);
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--color-secondary);
+    color: var(--color-primary);
 }
 
 /* 테이블을 감싸는 부모 요소에 스크롤 기능을 추가 (모바일 반응형 대비) */
 #data-display {
-    /* 기본적으로는 보이지 않지만, 모바일 미디어 쿼리에서 활성화 */
-    overflow-x: hidden; 
+    /* 기본적으로는 보이지 않지만, 모바일 미디어 쿼리에서 활성화 */
+    overflow-x: hidden; 
 }
 
 .data-table {
-    width: 100%;
-    border-collapse: collapse; 
-    margin-top: 20px;
-    font-size: 14px; 
+    width: 100%;
+    border-collapse: collapse; 
+    margin-top: 20px;
+    font-size: 14px; 
 }
 
 /* 테이블 셀 (th, td) 경계선 추가 */
 .data-table th,
 .data-table td {
-    border: 1px solid var(--color-border);
-    padding: 10px 15px; 
-    text-align: right; 
+    border: 1px solid var(--color-border);
+    padding: 10px 15px; 
+    text-align: right; 
 }
 
 /* 테이블 헤더 (th) 스타일 강조 */
 .data-table thead th {
-    background-color: var(--color-table-header);
-    color: var(--color-text);
-    font-weight: 700;
-    text-align: center; 
-    vertical-align: middle; 
+    background-color: var(--color-table-header);
+    color: var(--color-text);
+    font-weight: 700;
+    text-align: center; 
+    vertical-align: middle; 
 }
 
 /* 첫 번째 열 (월, 구분 등) 스타일 */
 .data-table tbody td:first-child {
-    text-align: center; 
-    background-color: var(--color-background);
-    font-weight: 500;
+    text-align: center; 
+    background-color: var(--color-background);
+    font-weight: 500;
 }
 
 /* 행 호버 효과 (마우스 올렸을 때 강조) */
 .data-table tbody tr:hover {
-    background-color: var(--color-table-row-hover);
-    cursor: default; 
+    background-color: var(--color-table-row-hover);
+    cursor: default; 
 }
+
 
 /* ==================================== */
 /* 8. 모바일 반응형 스타일 (Media Queries) */
@@ -196,63 +186,63 @@ body {
 
 /* 화면 너비가 768px 이하일 때 적용 (태블릿 세로, 스마트폰 가로/세로) */
 @media (max-width: 768px) {
-    
-    /* 1. 기본 레이아웃 조정 */
-    .container {
-        width: 100%; 
-        margin: -20px 0 10px 0; /* 모바일에서도 음수 마진으로 강제 조정 */
-        padding: 10px;
-        border-radius: 0; 
-        box-shadow: none; 
-    }
+    
+    /* 1. 기본 레이아웃 조정 */
+    .container {
+        width: 100%; 
+        margin: 10px 0;
+        padding: 10px;
+        border-radius: 0; 
+        box-shadow: none; 
+    }
 
-    .eco-header h1 {
-        font-size: 22px; 
-    }
-    
-    /* 2. 컨트롤 및 버튼 조정 */
-    .controls {
-        flex-direction: column; /* 선택 박스를 세로로 정렬 */
-        align-items: flex-start;
-        gap: 5px;
-        margin-bottom: 10px;
-    }
-    
-    .controls select {
-        width: 100%; 
-    }
+    .eco-header h1 {
+        font-size: 22px; 
+    }
+    
+    /* 2. 컨트롤 및 버튼 조정 */
+    .controls {
+        flex-direction: column; /* 선택 박스를 세로로 정렬 */
+        align-items: flex-start;
+        gap: 5px;
+        margin-bottom: 10px;
+    }
+    
+    .controls select {
+        width: 100%; 
+    }
 
-    .page-navigation {
-        gap: 5px;
-    }
-    
-    .page-navigation button {
-        padding: 8px 12px;
-        font-size: 14px; 
-        flex-grow: 1; 
-    }
-    
-    /* 3. 테이블 가독성 향상 (핵심 수정) */
-    
-    /* 테이블을 가로로 스크롤할 수 있도록 부모 요소를 만듭니다. */
-    #data-display {
-        overflow-x: auto; /* 가로 스크롤 활성화 */
-        -webkit-overflow-scrolling: touch; /* iOS 부드러운 스크롤 */
-    }
-    
-    /* 테이블 자체의 최소 너비를 설정하여 내용이 찌그러지지 않게 합니다. */
-    .data-table {
-        min-width: 700px; 
-        margin-top: 10px;
-        font-size: 12px; 
-    }
-    
-    .data-table th,
-    .data-table td {
-        padding: 8px 10px; 
-    }
+    .page-navigation {
+        gap: 5px;
+    }
+    
+    .page-navigation button {
+        padding: 8px 12px;
+        font-size: 14px; 
+        flex-grow: 1; 
+    }
+    
+    /* 3. 테이블 가독성 향상 (핵심 수정) */
+    
+    /* 테이블을 가로로 스크롤할 수 있도록 부모 요소를 만듭니다. */
+    #data-display {
+        overflow-x: auto; /* 가로 스크롤 활성화 */
+        -webkit-overflow-scrolling: touch; /* iOS 부드러운 스크롤 */
+    }
+    
+    /* 테이블 자체의 최소 너비를 설정하여 내용이 찌그러지지 않게 합니다. */
+    .data-table {
+        min-width: 700px; 
+        margin-top: 10px;
+        font-size: 12px; 
+    }
+    
+    .data-table th,
+    .data-table td {
+        padding: 8px 10px; 
+    }
 
-    .table-title {
-        font-size: 16px;
-    }
+    .table-title {
+        font-size: 16px;
+    }
 }
