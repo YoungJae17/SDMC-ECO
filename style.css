@@ -23,7 +23,7 @@
 }
 
 body {
-    font-family: 'Noto Sans KR', sans-serif, Arial, sans-serif; /* 폰트 우선순위 지정 */
+    font-family: 'Noto Sans KR', sans-serif, Arial, sans-serif;
     background-color: var(--color-background);
     color: var(--color-text);
     line-height: 1.6;
@@ -56,7 +56,7 @@ body {
     padding: 20px;
     background-color: #fff;
     border-radius: 8px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* 그림자 강화 */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 
 /* ==================================== */
@@ -94,65 +94,21 @@ body {
 }
 
 /* ==================================== */
-/* 6. 테이블 스타일 (Data Table) - 가독성 향상 */
+/* 6. 컨트롤 요소 스타일 (Select/Dropdown) */
 /* ==================================== */
-
-/* HTML 테이블 태그에 반드시 class="data-table"을 추가해야 합니다. */
-.data-table {
-    width: 100%;
-    border-collapse: collapse; /* 경계를 합쳐서 깔끔하게 처리 */
-    margin-top: 20px;
-    font-size: 14px; 
-}
-
-/* 테이블 셀 (th, td) 경계선 추가 */
-.data-table th,
-.data-table td {
-    /* 요청하신 표처럼 보이도록 경계선 추가 */
-    border: 1px solid var(--color-border);
-    padding: 10px 15px; 
-    text-align: right; /* 숫자 데이터를 오른쪽 정렬하여 가독성을 높입니다. */
-}
-
-/* 테이블 헤더 (th) 스타일 강조 */
-.data-table thead th {
-    background-color: var(--color-table-header);
-    color: var(--color-text);
-    font-weight: 700;
-    text-align: center; /* 헤더 텍스트는 중앙 정렬 */
-    /* 표의 열 제목이 여러 줄일 경우 대비해 수직 중앙 정렬 */
-    vertical-align: middle; 
-}
-
-/* 첫 번째 열 (월, 구분 등) 스타일 */
-.data-table tbody td:first-child {
-    text-align: center; /* 첫 번째 열은 중앙 정렬 */
-    background-color: var(--color-background); /* 연한 배경색으로 구분 */
-    font-weight: 500;
-}
-
-/* 행 호버 효과 (마우스 올렸을 때 강조) */
-.data-table tbody tr:hover {
-    background-color: var(--color-table-row-hover);
-    cursor: default; /* 호버시 커서 변경 방지 */
-}
-
-/* ==================================== */
-/* 7. 기타 UI 요소 스타일 (예: 드롭다운) */
-/* ==================================== */
-.select-group {
+.controls {
     display: flex;
     gap: 15px;
     margin-bottom: 15px;
     align-items: center;
 }
 
-.select-group label {
+.controls label {
     font-weight: 500;
     margin-right: 5px;
 }
 
-.select-group select {
+.controls select {
     padding: 8px 12px;
     border: 1px solid var(--color-border);
     border-radius: 4px;
@@ -162,7 +118,131 @@ body {
     transition: border-color 0.2s;
 }
 
-.select-group select:focus {
+.controls select:focus {
     border-color: var(--color-primary);
     outline: none;
+}
+
+/* ==================================== */
+/* 7. 테이블 스타일 (Data Table) - 가독성 향상 */
+/* ==================================== */
+
+.table-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--color-secondary);
+    color: var(--color-primary);
+}
+
+/* 테이블을 감싸는 부모 요소에 스크롤 기능을 추가 (모바일 반응형 대비) */
+#data-display {
+    /* 기본적으로는 보이지 않지만, 모바일 미디어 쿼리에서 활성화 */
+    overflow-x: hidden; 
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse; 
+    margin-top: 20px;
+    font-size: 14px; 
+}
+
+/* 테이블 셀 (th, td) 경계선 추가 */
+.data-table th,
+.data-table td {
+    border: 1px solid var(--color-border);
+    padding: 10px 15px; 
+    text-align: right; 
+}
+
+/* 테이블 헤더 (th) 스타일 강조 */
+.data-table thead th {
+    background-color: var(--color-table-header);
+    color: var(--color-text);
+    font-weight: 700;
+    text-align: center; 
+    vertical-align: middle; 
+}
+
+/* 첫 번째 열 (월, 구분 등) 스타일 */
+.data-table tbody td:first-child {
+    text-align: center; 
+    background-color: var(--color-background);
+    font-weight: 500;
+}
+
+/* 행 호버 효과 (마우스 올렸을 때 강조) */
+.data-table tbody tr:hover {
+    background-color: var(--color-table-row-hover);
+    cursor: default; 
+}
+
+
+/* ==================================== */
+/* 8. 모바일 반응형 스타일 (Media Queries) */
+/* ==================================== */
+
+/* 화면 너비가 768px 이하일 때 적용 (태블릿 세로, 스마트폰 가로/세로) */
+@media (max-width: 768px) {
+    
+    /* 1. 기본 레이아웃 조정 */
+    .container {
+        width: 100%; 
+        margin: 10px 0;
+        padding: 10px;
+        border-radius: 0; 
+        box-shadow: none; 
+    }
+
+    .eco-header h1 {
+        font-size: 22px; 
+    }
+    
+    /* 2. 컨트롤 및 버튼 조정 */
+    .controls {
+        flex-direction: column; /* 선택 박스를 세로로 정렬 */
+        align-items: flex-start;
+        gap: 5px;
+        margin-bottom: 10px;
+    }
+    
+    .controls select {
+        width: 100%; 
+    }
+
+    .page-navigation {
+        gap: 5px;
+    }
+    
+    .page-navigation button {
+        padding: 8px 12px;
+        font-size: 14px; 
+        flex-grow: 1; 
+    }
+    
+    /* 3. 테이블 가독성 향상 (핵심 수정) */
+    
+    /* 테이블을 가로로 스크롤할 수 있도록 부모 요소를 만듭니다. */
+    #data-display {
+        overflow-x: auto; /* 가로 스크롤 활성화 */
+        -webkit-overflow-scrolling: touch; /* iOS 부드러운 스크롤 */
+    }
+    
+    /* 테이블 자체의 최소 너비를 설정하여 내용이 찌그러지지 않게 합니다. */
+    .data-table {
+        min-width: 700px; 
+        margin-top: 10px;
+        font-size: 12px; 
+    }
+    
+    .data-table th,
+    .data-table td {
+        padding: 8px 10px; 
+    }
+
+    .table-title {
+        font-size: 16px;
+    }
 }
