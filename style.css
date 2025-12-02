@@ -242,25 +242,26 @@ body {
 }
 
 /* ==================================== */
-/* 9. 편집 기능 관련 스타일 */
+/* 9. 편집 기능 관련 스타일 - 너비 고정 및 스피너 숨김 */
 /* ==================================== */
+
 .data-table td.modified {
     background-color: #FFF9C4;
     border: 1px solid #FFC107 !important;
 }
 
 .data-table td input.editable-input {
-    width: 100%;
+    width: 100%; /* 너비를 100%로 강제 고정 */
     padding: 5px;
     margin: 0;
-    border: 1px solid var(--color-primary); /* 짙은 녹색 복원 */
+    border: 1px solid var(--color-primary);
     text-align: right;
-    box-sizing: border-box;
+    box-sizing: border-box; /* 패딩/테두리가 너비에 포함되도록 */
     font-size: 14px;
     height: 100%;
 }
 
-/* 스피너 숨기기 */
+/* 스피너 숨김 (브라우저가 너비를 재계산하는 원인 제거) */
 .data-table td input.editable-input::-webkit-outer-spin-button,
 .data-table td input.editable-input::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -269,6 +270,7 @@ body {
 .data-table td input.editable-input[type=number] {
     -moz-appearance: textfield;
 }
+
 
 /* ==================================== */
 /* 10. 메시지 스타일 */
