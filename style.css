@@ -257,44 +257,41 @@ body {
 }
 
 /* ==================================== */
-/* 9. 편집 기능 관련 스타일 - ✨ 최종 너비 고정 해결 코드 적용 ✨ */
+/* 9. 편집 기능 관련 스타일 - ✨ 최종 너비 고정 해결 (배경색으로 포커스 대체) ✨ */
 /* ==================================== */
 
 .data-table td.modified {
+    /* 수정된 셀 배경색은 그대로 유지 */
     background-color: #FFF9C4;
     border: 1px solid #FFC107 !important;
 }
 
 .data-table td input.editable-input {
     /* ------------------------------------------------------------- */
-    /* 너비 문제 해결의 핵심 수정 */
-    /* 1. 패딩/마진/보더를 제거하여 셀 내부의 100% 공간을 완벽히 차지하게 함 */
-    width: 100%;
-    padding: 0;
+    /* 너비 고정의 최종 해결 코드 */
+    width: 100%; 
+    padding: 0; 
     margin: 0;
-    border: none;
-    /* input 자체의 border를 제거 */
+    border: none; /* input 자체의 모든 테두리 제거 */
+    outline: none; /* input 자체의 포커스 윤곽선 제거 */
     /* ------------------------------------------------------------- */
-
-    /* 셀의 텍스트와 정확히 정렬되도록 */
+    
     text-align: right;
-    box-sizing: border-box;
+    box-sizing: border-box; 
     font-size: 14px;
     height: 100%;
-
-    /* 편집 모드에서 포커스를 강조하기 위해 셀에 직접 border를 주는 방식 대신 input에 outline 적용 */
-    outline: 2px solid var(--color-primary);
-    outline-offset: -2px;
-    /* outline이 셀 경계 안으로 들어가게 하여 셀 너비 유지를 도움 */
+    
+    /* 포커스 시 배경색을 연한 노란색으로 변경하여 편집 모드임을 시각적으로 표시 */
+    background-color: #fffde7; 
+    transition: background-color 0.2s; 
 }
 
-/* 스피너 숨김 (브라우저가 너비를 재계산하는 원인 제거) */
+/* 스피너 숨김은 그대로 유지 */
 .data-table td input.editable-input::-webkit-outer-spin-button,
 .data-table td input.editable-input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
-
 .data-table td input.editable-input[type=number] {
     -moz-appearance: textfield;
 }
