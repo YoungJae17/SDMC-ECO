@@ -1,259 +1,388 @@
-/* style.css - 최종 버전 */
+/* style.css - 에너지 대시보드 UI 최종 버전 (공백 제거 및 표 디자인 개선) */
 
 /* ==================================== */
 /* 1. CSS 변수 (Variable Definitions) */
 /* ==================================== */
 :root {
-    --color-primary: #38761d; /* 짙은 녹색 - 헤더, 주요 버튼 */
-    --color-secondary: #93c47d; /* 연한 녹색 - 강조, 호버 배경 */
-    --color-background: #f1f8e9; /* 아주 연한 녹색 배경 */
-    --color-text: #333; /* 기본 텍스트 색상 */
-    --color-border: #ccc; /* 일반 경계선 색상 */
-    --color-table-header: #e0e0e0; /* 테이블 헤더 배경색 */
-    --color-table-row-hover: #f9f9f9; /* 테이블 행 호버 배경색 */
+    --color-primary: #38761d;
+    /* 짙은 녹색 - 헤더, 주요 버튼 */
+    --color-secondary: #93c47d;
+    /* 연한 녹색 - 강조, 호버 배경 */
+    --color-accent: #e57373;
+    /* 적색 계열 - 마이너스/경고 표시 */
+    --color-positive: #66bb6a;
+    /* 녹색 계열 - 플러스/절감 표시 */
+    --color-background: #f1f8e9;
+    /* 아주 연한 녹색 배경 */
+    --color-text: #333;
+    /* 기본 텍스트 색상 */
+    --color-light-text: #666;
+    /* 보조 텍스트 색상 */
+    --color-border: #ccc;
+    /* 일반 경계선 색상 */
+    --color-card-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    /* 카드 그림자 */
+    --color-table-header: #ffffff;
+    /* (수정) 테이블 헤더 배경색을 흰색으로 변경 */
+    --color-table-header-text: #333;
+    /* (수정) 테이블 헤더 텍스트 색상을 검은색 계열로 변경 */
+    --color-table-row-hover: #f9f9f9;
+    /* 테이블 행 호버 배경색 */
 }
 
 /* ==================================== */
-/* 2. 기본 스타일 (Base Styles) */
+/* 2. 기본 스타일 (Base Styles) - (공백 제거: body 마진 0) */
 /* ==================================== */
 * {
-    box-sizing: border-box;
-    /* 모든 요소의 마진과 패딩을 초기화하여 브라우저 기본값 간섭 방지 */
-    margin: 0;
-    padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-    font-family: 'Noto Sans KR', sans-serif, Arial, sans-serif;
-    background-color: var(--color-background);
-    color: var(--color-text);
-    line-height: 1.6;
+    font-family: 'Noto Sans KR', sans-serif, Arial, sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    line-height: 1.6;
+    margin-top: 0;
+    /* 브라우저 기본 마진 제거 */
 }
 
 /* ==================================== */
 /* 3. 헤더 스타일 (Header Styles) */
 /* ==================================== */
 .eco-header {
-    background-color: var(--color-primary);
-    color: white;
-    padding: 20px 0;
-    text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    /* 컨테이너보다 높은 z-index로 그림자가 위로 표시되도록 보장 */
-    position: relative; 
+    background-color: var(--color-primary);
+    color: white;
+    padding: 25px 0;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
     z-index: 10;
 }
 
 .eco-header h1 {
-    font-weight: 700;
-    margin-bottom: 5px;
-    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 0;
+    font-size: 32px;
 }
 
 /* ==================================== */
-/* 4. 컨테이너 스타일 (Container) - 상단 마진 강제 제거 */
+/* 4. 컨테이너 스타일 (Container) - (공백 제거: 상단 마진 0) */
 /* ==================================== */
 .container {
-    width: 95%; 
-    max-width: 1300px; 
-    
-    /* 🌟 상단 공백 제거: 음수 마진을 -50px로 설정하여 어떤 상황에서도 헤더에 붙도록 강제 */
-    margin-top: -50px; 
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 30px; /* 하단 여백은 유지 */
+    width: 95%;
+    max-width: 1400px;
+    margin: 0 auto 30px auto;
+    /* 상단 마진을 0으로 설정하여 헤더 아래에 붙임 */
 
-    padding: 20px;
-    position: relative; /* z-index 적용을 위해 필요 */
+    padding: 30px;
+    position: relative;
     z-index: 5;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border-radius: 0 0 12px 12px;
+    /* 상단 모서리 둥글게 제거 */
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
 }
 
 /* ==================================== */
-/* 5. 페이지 이동 버튼 스타일 (Tab Navigation) */
+/* 5. 페이지 이동/탭 스타일 (Tab Navigation) */
 /* ==================================== */
 .page-navigation {
-    margin-bottom: 20px;
-    border-bottom: 2px solid var(--color-border);
-    padding-bottom: 15px;
-    display: flex;
-    gap: 10px;
+    margin-bottom: 30px;
+    border-bottom: 2px solid var(--color-border);
+    padding-bottom: 0;
+    display: flex;
+    gap: 5px;
 }
 
 .page-navigation button {
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: 500;
-    cursor: pointer;
-    border: 1px solid var(--color-primary);
-    background-color: white;
-    color: var(--color-primary);
-    border-radius: 5px;
-    transition: all 0.2s;
+    padding: 12px 25px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    color: var(--color-light-text);
+    border-radius: 8px 8px 0 0;
+    margin-bottom: -2px;
+    transition: all 0.2s;
 }
 
 .page-navigation button:hover:not(.active-button) {
-    background-color: var(--color-secondary);
-    color: white;
+    background-color: var(--color-table-row-hover);
+    color: var(--color-text);
 }
 
 .page-navigation .active-button {
-    background-color: var(--color-primary);
-    color: white;
-    font-weight: 700;
+    background-color: #fff;
+    color: var(--color-primary);
+    font-weight: 700;
+    border-bottom: 3px solid var(--color-primary);
 }
 
 /* ==================================== */
-/* 6. 컨트롤 요소 스타일 (Select/Dropdown) */
+/* 6. 컨트롤 요소 스타일 (Select/Dropdown/Filter) */
 /* ==================================== */
 .controls {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 15px;
-    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 20px;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.control-group {
+    display: flex;
+    align-items: center;
 }
 
 .controls label {
-    font-weight: 500;
-    margin-right: 5px;
+    font-weight: 500;
+    margin-right: 10px;
+    color: var(--color-light-text);
 }
 
-.controls select {
-    padding: 12px 15px;
-    border: 1px solid var(--color-border);
-    border-radius: 4px;
-    background-color: white;
-    font-size: 14px;
-    cursor: pointer;
-    transition: border-color 0.2s;
+.controls select,
+.controls input[type="text"] {
+    padding: 10px 15px;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    background-color: white;
+    font-size: 15px;
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    min-width: 150px;
 }
 
-.controls select:focus {
-    border-color: var(--color-primary);
-    outline: none;
+.controls select:focus,
+.controls input:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 2px rgba(56, 118, 29, 0.2);
+    outline: none;
 }
 
 /* ==================================== */
-/* 7. 테이블 스타일 (Data Table) - 가독성 향상 */
+/* 7. 테이블 헤더 및 액션 영역 */
 /* ==================================== */
+.table-title-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 3px solid var(--color-secondary);
+}
 
 .table-title {
-    font-size: 18px;
-    font-weight: 700;
-    margin-bottom: 15px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid var(--color-secondary);
-    color: var(--color-primary);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--color-primary);
 }
 
-/* 테이블을 감싸는 부모 요소에 스크롤 기능을 추가 (모바일 반응형 대비) */
+.table-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.edit-button {
+    padding: 8px 15px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid var(--color-primary);
+    background-color: var(--color-primary);
+    color: white;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+}
+
+.edit-button:hover:not([disabled]) {
+    background-color: #2e6018;
+    /* 더 어두운 녹색 */
+    border-color: #2e6018;
+}
+
+.edit-button[disabled] {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* ==================================== */
+/* 8. 테이블 스타일 (Data Table) - (표 디자인 수정) */
+/* ==================================== */
+
 #data-display {
-    /* 기본적으로는 보이지 않지만, 모바일 미디어 쿼리에서 활성화 */
-    overflow-x: hidden; 
+    overflow-x: hidden;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    /* 표 제목과 표 사이에 불필요한 공백 제거를 위해 margin-top 조정 */
+    margin-top: -1px;
 }
 
 .data-table {
-    width: 100%;
-    border-collapse: collapse; 
-    margin-top: 20px;
-    font-size: 14px; 
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0;
+    font-size: 14px;
 }
 
-/* 테이블 셀 (th, td) 경계선 추가 */
 .data-table th,
 .data-table td {
-    border: 1px solid var(--color-border);
-    padding: 10px 15px; 
-    text-align: right; 
+    border: none;
+    border-bottom: 1px solid var(--color-border);
+    padding: 12px 18px;
+    text-align: right;
 }
 
-/* 테이블 헤더 (th) 스타일 강조 */
 .data-table thead th {
-    background-color: var(--color-table-header);
-    color: var(--color-text);
-    font-weight: 700;
-    text-align: center; 
-    vertical-align: middle; 
+    background-color: var(--color-table-header);
+    /* 흰색으로 변경 */
+    color: var(--color-table-header-text);
+    /* 검은색 계열로 변경 */
+    font-weight: 600;
+    text-align: center;
+    vertical-align: middle;
+    border-bottom: 2px solid var(--color-secondary);
 }
 
-/* 첫 번째 열 (월, 구분 등) 스타일 */
+/* 월(month) 컬럼 배경색 수정 */
 .data-table tbody td:first-child {
-    text-align: center; 
-    background-color: var(--color-background);
-    font-weight: 500;
+    text-align: left;
+    background-color: #ffffff;
+    /* 흰색으로 변경 */
+    font-weight: 600;
+    color: var(--color-primary);
 }
 
-/* 행 호버 효과 (마우스 올렸을 때 강조) */
 .data-table tbody tr:hover {
-    background-color: var(--color-table-row-hover);
-    cursor: default; 
+    background-color: var(--color-table-row-hover);
+    cursor: default;
 }
 
 /* ==================================== */
-/* 8. 모바일 반응형 스타일 (Media Queries) */
+/* 9. 편집 기능 관련 스타일 (더블클릭 편집 UI) */
 /* ==================================== */
 
-/* 화면 너비가 768px 이하일 때 적용 (태블릿 세로, 스마트폰 가로/세로) */
+/* 수정된 셀 시각적 표시 */
+.data-table td.modified {
+    background-color: #fff9c4;
+    /* 아주 연한 노란색 배경 */
+    border: 1px dashed #fdd835 !important;
+    /* 노란색 점선 테두리 */
+}
+
+/* 편집 중인 input 필드 스타일 (스피너 제거) */
+.data-table td input.editable-input {
+    width: 100%;
+    padding: 5px;
+    margin: 0;
+    border: 1px solid #38761d;
+    /* primary color 테두리 */
+    text-align: right;
+    box-sizing: border-box;
+    font-size: 14px;
+    height: 100%;
+    /* 셀 높이에 맞춤 */
+}
+
+/* **[핵심]** 1. Chrome, Safari, Edge에서 스피너 버튼 숨기기 */
+.data-table td input.editable-input::-webkit-outer-spin-button,
+.data-table td input.editable-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* **[핵심]** 2. Firefox에서 스피너 버튼 숨기기 */
+.data-table td input.editable-input[type=number] {
+    -moz-appearance: textfield;
+}
+
+/* ==================================== */
+/* 10. 메시지 스타일 */
+/* ==================================== */
+#save-status,
+#final-status {
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+
+/* ==================================== */
+/* 11. 모바일 반응형 스타일 (Media Queries) */
+/* ==================================== */
+
 @media (max-width: 768px) {
-    
-    /* 1. 기본 레이아웃 조정 */
-    .container {
-        width: 100%; 
-        margin: -20px 0 10px 0; /* 모바일에서도 음수 마진으로 강제 조정 */
-        padding: 10px;
-        border-radius: 0; 
-        box-shadow: none; 
-    }
 
-    .eco-header h1 {
-        font-size: 22px; 
-    }
-    
-    /* 2. 컨트롤 및 버튼 조정 */
-    .controls {
-        flex-direction: column; /* 선택 박스를 세로로 정렬 */
-        align-items: flex-start;
-        gap: 5px;
-        margin-bottom: 10px;
-    }
-    
-    .controls select {
-        width: 100%; 
-    }
+    /* 1. 기본 레이아웃 조정 */
+    .container {
+        width: 100%;
+        margin: 0;
+        /* 상단 마진 0 */
+        padding: 15px;
+        border-radius: 0;
+        box-shadow: none;
+    }
 
-    .page-navigation {
-        gap: 5px;
-    }
-    
-    .page-navigation button {
-        padding: 8px 12px;
-        font-size: 14px; 
-        flex-grow: 1; 
-    }
-    
-    /* 3. 테이블 가독성 향상 (핵심 수정) */
-    
-    /* 테이블을 가로로 스크롤할 수 있도록 부모 요소를 만듭니다. */
-    #data-display {
-        overflow-x: auto; /* 가로 스크롤 활성화 */
-        -webkit-overflow-scrolling: touch; /* iOS 부드러운 스크롤 */
-    }
-    
-    /* 테이블 자체의 최소 너비를 설정하여 내용이 찌그러지지 않게 합니다. */
-    .data-table {
-        min-width: 700px; 
-        margin-top: 10px;
-        font-size: 12px; 
-    }
-    
-    .data-table th,
-    .data-table td {
-        padding: 8px 10px; 
-    }
+    .eco-header h1 {
+        font-size: 26px;
+    }
 
-    .table-title {
-        font-size: 16px;
-    }
+    /* 2. 컨트롤 및 버튼 조정 */
+    .controls {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .controls select {
+        width: 100%;
+    }
+
+    .page-navigation {
+        overflow-x: auto;
+        white-space: nowrap;
+        padding-bottom: 5px;
+    }
+
+    .page-navigation button {
+        padding: 10px 15px;
+        font-size: 14px;
+        flex-shrink: 0;
+    }
+
+    /* 3. 테이블 가독성 향상 */
+    .table-title-area {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .table-actions {
+        margin-top: 10px;
+        width: 100%;
+        justify-content: center;
+    }
+
+    #data-display {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        border-radius: 4px;
+    }
+
+    .data-table {
+        min-width: 750px;
+        font-size: 13px;
+    }
+
+    .data-table th,
+    .data-table td {
+        padding: 10px 12px;
+    }
+
+    .table-title {
+        font-size: 18px;
+    }
 }

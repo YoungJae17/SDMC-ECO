@@ -1,7 +1,7 @@
 // chart_script.js 파일 - 차트 데이터 로드 및 시각화 담당
 
 // 🚨🚨🚨 복사한 실제 값으로 반드시 대체해야 합니다! 🚨🚨🚨
-const SUPABASE_URL = 'https://sewmhqtmprbcofggbjfn.supabase.co'; 
+const SUPABASE_URL = 'https://sewmhqtmprbcofggbjfn.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNld21ocXRtcHJiY29mZ2diamZuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM0NjkwNDgsImV4cCI6MjA3OTA0NTA0OH0.31vxwOHkxkFKXFlEZYxS4nXQlwCPlD1tesHqj2dpAG0';
 // ---------------------------------------------------------------------------------
 
@@ -11,12 +11,12 @@ let myChart = null; // 차트 객체를 저장할 전역 변수
 // 🌟 Supabase에서 데이터를 가져와 차트를 그리는 함수
 async function drawChart() {
     const site = document.getElementById('site-select').value.trim();
-    const year = parseInt(document.getElementById('year-select').value, 10); 
+    const year = parseInt(document.getElementById('year-select').value, 10);
     const chartErrorDiv = document.getElementById('chart-error');
     const chartCanvas = document.getElementById('energyChart');
 
     chartErrorDiv.style.display = 'none'; // 오류 메시지 숨김
-    
+
     // 로딩 중임을 사용자에게 알립니다.
     if (myChart) {
         myChart.destroy();
@@ -26,11 +26,11 @@ async function drawChart() {
 
     try {
         const { data: energyData, error } = await supabase
-            .from('energy_data') 
-            .select('*')         
-            .eq('site_name', site) 
-            .eq('data_year', year)  
-            .order('data_month', { ascending: true }); 
+            .from('energy_data')
+            .select('*')
+            .eq('site_name', site)
+            .eq('data_year', year)
+            .order('data_month', { ascending: true });
 
         if (error) throw error;
 
