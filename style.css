@@ -1,21 +1,21 @@
-/* style.css - 디자인 개선 버전 (청록색 계열, 그림자 강조, 테이블 스타일 변경) */
+/* style.css - 초록색 테마 유지 및 디자인 개선 버전 */
 
 /* ==================================== */
-/* 1. CSS 변수 (Variable Definitions) - 청록색 계열로 변경 */
+/* 1. CSS 변수 (Variable Definitions) - 기존 녹색 테마 유지 */
 /* ==================================== */
 :root {
-    --color-primary: #00897B; /* 진한 청록색 (Teal) */
-    --color-secondary: #00BCD4; /* 밝은 청록색 */
-    --color-accent: #E57373; /* 적색 계열 - 마이너스/경고 표시 유지 */
-    --color-positive: #4CAF50; /* 녹색 계열 - 플러스/절감 표시 */
-    --color-background: #f4f7f6; /* 아주 연한 회색 배경 */
-    --color-text: #333; /* 기본 텍스트 색상 */
-    --color-light-text: #666; /* 보조 텍스트 색상 */
-    --color-border: #E0E0E0; /* 아주 연한 경계선 색상 */
-    --color-card-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* 그림자 강조 */
-    --color-table-header: #E0F2F1; /* 헤더 배경 연한 청록색 */
-    --color-table-header-text: #00695C; /* 헤더 텍스트 진한 청록색 */
-    --color-table-row-hover: #FAFAFA; /* 테이블 행 호버 배경색 (아주 연한 회색) */
+    --color-primary: #38761d; /* 짙은 녹색 (기존 유지) */
+    --color-secondary: #93c47d; /* 연한 녹색 (기존 유지) */
+    --color-accent: #e57373; /* 적색 계열 - 마이너스/경고 표시 */
+    --color-positive: #66bb6a; /* 녹색 계열 - 플러스/절감 표시 */
+    --color-background: #F8F9FA; /* 아주 밝은 회색 배경으로 변경 (컨테이너 대비 극대화) */
+    --color-text: #333;
+    --color-light-text: #6c757d; /* 보조 텍스트는 약간 어두운 회색으로 변경 */
+    --color-border: #E9ECEF; /* 매우 연한 경계선 색상 */
+    --color-card-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* 그림자 강조 */
+    --color-table-header: #EBF2E8; /* 헤더 배경 연한 녹색 */
+    --color-table-header-text: #38761d; /* 헤더 텍스트 짙은 녹색 */
+    --color-table-row-hover: #F2F7F0; /* 테이블 행 호버 배경색 */
 }
 
 /* ==================================== */
@@ -43,7 +43,7 @@ body {
     color: white;
     padding: 30px 0; /* 패딩 증가 */
     text-align: center;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* 그림자 더 강조 */
     position: relative;
     z-index: 10;
 }
@@ -51,7 +51,10 @@ body {
 .eco-header h1 {
     font-weight: 700;
     margin-bottom: 5px;
-    font-size: 34px; /* 폰트 크기 증가 */
+    font-size: 34px;
+}
+.eco-header p {
+    color: rgba(255, 255, 255, 0.9); /* 부제목 색상 연하게 */
 }
 
 /* ==================================== */
@@ -60,7 +63,7 @@ body {
 .container {
     width: 95%;
     max-width: 1400px;
-    margin: -1px auto 30px auto;
+    margin: -1px auto 40px auto; /* 상단 공백 제거 및 하단 마진 증가 */
     padding: 30px;
     position: relative;
     z-index: 5;
@@ -74,7 +77,7 @@ body {
 /* ==================================== */
 .page-navigation {
     margin-bottom: 30px;
-    border-bottom: 2px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border); /* 얇은 구분선 */
     padding-bottom: 0;
     display: flex;
     gap: 5px;
@@ -89,7 +92,7 @@ body {
     background-color: transparent;
     color: var(--color-light-text);
     border-radius: 8px 8px 0 0;
-    margin-bottom: -2px;
+    margin-bottom: -1px; /* 탭과 선이 붙도록 조정 */
     transition: all 0.2s;
 }
 
@@ -115,19 +118,20 @@ body {
     margin-bottom: 20px;
     align-items: center;
     padding: 10px 0;
+    border-bottom: 1px dashed var(--color-border); /* 컨트롤 영역 구분선 */
 }
 
 .controls label {
-    font-weight: 500;
+    font-weight: 600; /* 레이블 굵게 */
     margin-right: 10px;
-    color: var(--color-primary); /* 레이블 색상 강조 */
+    color: var(--color-primary);
 }
 
 .controls select,
 .controls input[type="text"] {
     padding: 10px 15px;
     border: 1px solid var(--color-border);
-    border-radius: 8px; /* 모서리 둥글게 */
+    border-radius: 8px;
     background-color: white;
     font-size: 15px;
     cursor: pointer;
@@ -138,7 +142,7 @@ body {
 .controls select:focus,
 .controls input:focus {
     border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgba(0, 137, 123, 0.3); /* 포커스 효과 강조 */
+    box-shadow: 0 0 0 3px rgba(56, 118, 29, 0.3);
     outline: none;
 }
 
@@ -149,15 +153,14 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     padding-bottom: 5px;
-    border-bottom: 3px solid var(--color-secondary);
 }
 
 .table-title {
-    font-size: 22px; /* 폰트 크기 증가 */
+    font-size: 22px;
     font-weight: 700;
-    color: var(--color-primary);
+    color: var(--color-text); /* 제목은 검은색 계열로 변경 */
 }
 
 .table-actions {
@@ -166,25 +169,24 @@ body {
 }
 
 .edit-button {
-    padding: 10px 18px; /* 패딩 증가 */
+    padding: 10px 18px;
     font-size: 15px;
     font-weight: 600;
     cursor: pointer;
-    border: none; /* 테두리 제거 */
+    border: none;
     background-color: var(--color-primary);
     color: white;
     border-radius: 6px;
     transition: background-color 0.2s, transform 0.1s;
 }
 
-/* 저장 버튼에 아이콘 추가 (CSS로 직접 구현 불가, JS에서 텍스트 변경 권장) */
 .edit-button:before {
-    content: "💾 "; /* 임시 아이콘 */
+    content: "💾 ";
 }
 
 .edit-button:hover:not([disabled]) {
-    background-color: #00695C; /* 더 진한 청록색 */
-    transform: translateY(-1px); /* 약간 띄우는 효과 */
+    background-color: #2e6018; /* 더 어두운 녹색 */
+    transform: translateY(-1px);
 }
 
 .edit-button[disabled] {
@@ -199,7 +201,7 @@ body {
 
 #data-display {
     overflow-x: hidden;
-    border: none; /* 전체 테두리 제거 */
+    border: 1px solid var(--color-border);
     border-radius: 8px;
     margin-top: -1px;
 }
@@ -209,21 +211,21 @@ body {
     border-collapse: collapse;
     margin-top: 0;
     font-size: 14px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* 테이블 자체에 은은한 그림자 */
+    background-color: white;
 }
 
 .data-table th,
 .data-table td {
     border: none;
     border-bottom: 1px solid var(--color-border); /* 가로줄만 남김 */
-    padding: 14px 18px; /* 패딩 증가 */
+    padding: 14px 18px;
     text-align: right;
     transition: background-color 0.1s;
 }
 
 .data-table thead th {
-    background-color: var(--color-table-header); /* 연한 청록색 배경 */
-    color: var(--color-table-header-text); /* 진한 청록색 텍스트 */
+    background-color: var(--color-table-header); /* 연한 녹색 배경 */
+    color: var(--color-table-header-text); /* 짙은 녹색 텍스트 */
     font-weight: 700;
     text-align: center;
     vertical-align: middle;
@@ -234,8 +236,8 @@ body {
 .data-table tbody td:first-child {
     text-align: left;
     background-color: #ffffff;
-    font-weight: 700; /* 폰트 굵기 강조 */
-    color: var(--color-primary);
+    font-weight: 700;
+    color: var(--color-text);
 }
 
 .data-table tbody tr:hover {
@@ -244,16 +246,14 @@ body {
 }
 
 /* ==================================== */
-/* 9. 편집 기능 관련 스타일 (더블클릭 편집 UI) */
+/* 9. 편집 기능 관련 스타일 */
 /* ==================================== */
 
-/* 수정된 셀 시각적 표시 */
 .data-table td.modified {
-    background-color: #FFF9C4; /* 연한 노란색 배경 */
-    border: 1px solid #FFC107 !important; /* 노란색 실선 테두리 */
+    background-color: #FFF9C4;
+    border: 1px solid #FFC107 !important;
 }
 
-/* 편집 중인 input 필드 스타일 (스피너 제거) */
 .data-table td input.editable-input {
     width: 100%;
     padding: 5px;
@@ -278,14 +278,21 @@ body {
 /* ==================================== */
 /* 10. 메시지 스타일 */
 /* ==================================== */
-#save-status,
-#final-status {
-    padding: 10px;
-    margin-top: 10px;
-    border-radius: 5px;
-    font-size: 15px;
+.loading-message {
+    padding: 20px;
+    text-align: center;
+    font-size: 18px;
+    color: var(--color-light-text);
 }
 
+.loading-message.error {
+    color: var(--color-accent);
+    font-weight: 700;
+    border: 1px solid var(--color-accent);
+    background-color: #fcebeb;
+    border-radius: 8px;
+    margin-top: 15px;
+}
 
 /* ==================================== */
 /* 11. 모바일 반응형 스타일 (Media Queries) */
@@ -293,7 +300,6 @@ body {
 
 @media (max-width: 768px) {
 
-    /* 1. 기본 레이아웃 조정 */
     .container {
         width: 100%;
         margin: 0;
@@ -306,13 +312,12 @@ body {
         font-size: 24px;
     }
 
-    /* 2. 컨트롤 및 버튼 조정 */
     .controls {
         flex-direction: column;
         align-items: stretch;
         gap: 10px;
     }
-
+    
     .controls select {
         width: 100%;
     }
@@ -329,7 +334,6 @@ body {
         flex-shrink: 0;
     }
 
-    /* 3. 테이블 가독성 향상 */
     .table-title-area {
         flex-direction: column;
         align-items: flex-start;
