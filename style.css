@@ -4,18 +4,23 @@
 /* 1. CSS 변수 (Variable Definitions) - ✨ 짙은 녹색 테마 복원 영역 ✨ */
 /* ==================================== */
 :root {
-    --color-primary: #38761d; /* 짙은 녹색 (헤더, 버튼) */
-    --color-secondary: #93c47d; /* 연한 녹색 (테이블 헤더 배경) */
+    --color-primary: #38761d;
+    /* 짙은 녹색 (헤더, 버튼) */
+    --color-secondary: #93c47d;
+    /* 연한 녹색 (테이블 헤더 배경) */
     --color-accent: #e57373;
     --color-positive: #66bb6a;
-    --color-background: #F8F9FA; /* 배경 */
+    --color-background: #F8F9FA;
+    /* 배경 */
     --color-text: #333;
     --color-light-text: #6c757d;
-    --color-border: #D1D9E0; /* 테이블 선 색상 */
+    --color-border: #D1D9E0;
+    /* 테이블 선 색상 */
     --color-card-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     --color-table-header: var(--color-secondary);
     --color-table-header-text: #333;
-    --color-table-row-hover: #F2F7F0; /* 행 호버 배경 */
+    --color-table-row-hover: #F2F7F0;
+    /* 행 호버 배경 */
 }
 
 /* ==================================== */
@@ -39,7 +44,8 @@ body {
 /* 3. 헤더 스타일 (Header Styles) */
 /* ==================================== */
 .eco-header {
-    background-color: var(--color-primary); /* 짙은 녹색 복원 */
+    background-color: var(--color-primary);
+    /* 짙은 녹색 복원 */
     color: white;
     padding: 35px 0;
     text-align: center;
@@ -54,6 +60,7 @@ body {
     font-size: 38px;
     letter-spacing: -1px;
 }
+
 .eco-header p {
     color: rgba(255, 255, 255, 0.85);
     font-weight: 500;
@@ -100,9 +107,11 @@ body {
 
 .page-navigation .active-button {
     background-color: #fff;
-    color: var(--color-primary); /* 짙은 녹색 복원 */
+    color: var(--color-primary);
+    /* 짙은 녹색 복원 */
     font-weight: 700;
-    border-bottom: 3px solid var(--color-primary); /* 짙은 녹색 복원 */
+    border-bottom: 3px solid var(--color-primary);
+    /* 짙은 녹색 복원 */
 }
 
 /* ==================================== */
@@ -138,7 +147,8 @@ body {
 
 .controls select:focus,
 .controls input:focus {
-    border-color: var(--color-primary); /* 짙은 녹색 복원 */
+    border-color: var(--color-primary);
+    /* 짙은 녹색 복원 */
     box-shadow: 0 0 0 3px rgba(56, 118, 29, 0.3);
     outline: none;
 }
@@ -166,7 +176,8 @@ body {
     font-weight: 600;
     cursor: pointer;
     border: none;
-    background-color: var(--color-primary); /* 짙은 녹색 복원 */
+    background-color: var(--color-primary);
+    /* 짙은 녹색 복원 */
     color: white;
     border-radius: 8px;
     transition: background-color 0.2s, transform 0.1s;
@@ -177,7 +188,8 @@ body {
 }
 
 .edit-button:hover:not([disabled]) {
-    background-color: #2e6018; /* 짙은 녹색 복원 */
+    background-color: #2e6018;
+    /* 짙은 녹색 복원 */
     transform: translateY(-1px);
 }
 
@@ -221,12 +233,14 @@ body {
 }
 
 .data-table thead th {
-    background-color: var(--color-table-header); /* 연한 녹색 복원 */
+    background-color: var(--color-table-header);
+    /* 연한 녹색 복원 */
     color: var(--color-table-header-text);
     font-weight: 700;
     text-align: center;
     vertical-align: middle;
-    border-bottom: 1px solid var(--color-border); /* 얇은 밑줄 유지 */
+    border-bottom: 1px solid var(--color-border);
+    /* 얇은 밑줄 유지 */
 }
 
 .data-table tbody td:first-child {
@@ -237,12 +251,13 @@ body {
 }
 
 .data-table tbody tr:hover {
-    background-color: var(--color-table-row-hover); /* 행 호버 배경 복원 */
+    background-color: var(--color-table-row-hover);
+    /* 행 호버 배경 복원 */
     cursor: default;
 }
 
 /* ==================================== */
-/* 9. 편집 기능 관련 스타일 - 너비 고정 및 스피너 숨김 */
+/* 9. 편집 기능 관련 스타일 - ✨ 최종 너비 고정 해결 코드 적용 ✨ */
 /* ==================================== */
 
 .data-table td.modified {
@@ -251,14 +266,26 @@ body {
 }
 
 .data-table td input.editable-input {
-    width: 100%; /* 너비를 100%로 강제 고정 */
-    padding: 5px;
+    /* ------------------------------------------------------------- */
+    /* 너비 문제 해결의 핵심 수정 */
+    /* 1. 패딩/마진/보더를 제거하여 셀 내부의 100% 공간을 완벽히 차지하게 함 */
+    width: 100%;
+    padding: 0;
     margin: 0;
-    border: 1px solid var(--color-primary);
+    border: none;
+    /* input 자체의 border를 제거 */
+    /* ------------------------------------------------------------- */
+
+    /* 셀의 텍스트와 정확히 정렬되도록 */
     text-align: right;
-    box-sizing: border-box; /* 패딩/테두리가 너비에 포함되도록 */
+    box-sizing: border-box;
     font-size: 14px;
     height: 100%;
+
+    /* 편집 모드에서 포커스를 강조하기 위해 셀에 직접 border를 주는 방식 대신 input에 outline 적용 */
+    outline: 2px solid var(--color-primary);
+    outline-offset: -2px;
+    /* outline이 셀 경계 안으로 들어가게 하여 셀 너비 유지를 도움 */
 }
 
 /* 스피너 숨김 (브라우저가 너비를 재계산하는 원인 제거) */
@@ -267,10 +294,10 @@ body {
     -webkit-appearance: none;
     margin: 0;
 }
+
 .data-table td input.editable-input[type=number] {
     -moz-appearance: textfield;
 }
-
 
 /* ==================================== */
 /* 10. 메시지 스타일 */
@@ -296,6 +323,7 @@ body {
 /* ==================================== */
 
 @media (max-width: 768px) {
+
     /* (반응형 코드는 동일하게 유지됩니다.) */
     .container {
         width: 100%;
@@ -314,7 +342,7 @@ body {
         align-items: stretch;
         gap: 10px;
     }
-    
+
     .controls select {
         width: 100%;
     }
