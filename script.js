@@ -12,6 +12,7 @@ const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 let currentData = [];
 let originalData = {}; // {row_id: {column: value, ...}} 원본 데이터
 let modifiedCells = {}; // {row_id: {column: new_value, ...}} 변경된 데이터 임시 저장
+let lastTouchTime = 0; // 🚨 [추가] 모바일 더블 탭 감지를 위한 변수
 
 // 숫자에 천 단위 쉼표를 넣어주는 함수
 function formatNumber(num) {
@@ -33,6 +34,7 @@ async function showData() {
 
     // 변경사항이 남아있으면 경고
     if (Object.keys(modifiedCells).length > 0) {
+        // 기존 confirm() 사용
         if (!confirm("저장하지 않은 변경사항이 있습니다. 페이지를 다시 로드하시겠습니까?")) {
             return;
         }
@@ -67,7 +69,7 @@ async function showData() {
                     <button id="save-all-button" class="edit-button" disabled>변경 사항 저장</button>
                 </div>
             </div>
-            <p style="font-size: 13px; color: #666; margin-bottom: 15px;">💡 값을 '더블클릭'하여 수정할 수 있습니다. 수정 후 '변경 사항 저장' 버튼을 누르세요.</p>
+            <p style="font-size: 13px; color: #666; margin-bottom: 15px;">💡 값을 '더블클릭' 또는 '더블 탭'하여 수정할 수 있습니다. 수정 후 '변경 사항 저장' 버튼을 누르세요.</p>
             <table class="data-table">
                 <caption>${site} (${year}년) 월별 에너지 및 탄소 배출 현황</caption>
                 <thead>
@@ -117,7 +119,11 @@ async function showData() {
 
         // --- 이벤트 연결 ---
         document.querySelectorAll('.editable-cell').forEach(cell => {
+            // 1. 데스크톱용: 기존 dblclick 유지
             cell.addEventListener('dblclick', handleCellDblClick);
+            
+            // 2. 모바일용: touchstart 리스너 추가 (더블 탭 감지)
+            cell.addEventListener('touchstart', handleDoubleTap);
         });
         document.getElementById('save-all-button').addEventListener('click', saveChanges);
 
@@ -134,8 +140,34 @@ async function showData() {
 }
 
 /**
- * 3. 셀 더블클릭 핸들러: TD를 INPUT으로 변환
- * @param {Event} event - 더블클릭 이벤트
+ * 🚨 [추가] 모바일 더블 탭 처리를 위한 새로운 핸들러
+ * 300ms 이내에 두 번 터치되었는지 확인하고 편집 모드를 시작합니다.
+ * @param {Event} event 
+ */
+function handleDoubleTap(event) {
+    // 1개 이상의 터치(멀티 터치)는 무시
+    if (event.touches.length > 1) return; 
+
+    const touchTime = new Date().getTime();
+    
+    // 300ms(0.3초) 이내에 두 번째 탭이 들어왔는지 확인
+    if (touchTime - lastTouchTime < 300) {
+        event.preventDefault(); // 더블 탭 시 확대/축소 방지 (CSS에서도 처리했지만 JS에서 한 번 더 보강)
+        const cell = event.currentTarget;
+        
+        // 더블 탭으로 인식되면 기존 더블 클릭 핸들러를 호출하여 편집 모드 시작
+        // dblclick 핸들러가 event.currentTarget을 기대하므로 객체를 만들어서 전달
+        handleCellDblClick({ currentTarget: cell }); 
+        lastTouchTime = 0; // 초기화
+    } else {
+        lastTouchTime = touchTime;
+    }
+}
+
+
+/**
+ * 3. 셀 더블클릭 핸들러: TD를 INPUT으로 변환 (데스크톱 및 JS 호출용)
+ * @param {Event} event - 더블클릭 이벤트 (또는 touchstart에 의해 모의된 이벤트 객체)
  */
 function handleCellDblClick(event) {
     const cell = event.currentTarget;
@@ -231,10 +263,12 @@ async function saveChanges() {
     }
 
     if (changesToSave.length === 0) {
+        // 기존 alert() 사용
         alert("변경된 데이터가 없습니다.");
         return;
     }
 
+    // 기존 confirm() 사용
     if (!confirm(`${changesToSave.length}건의 변경 사항을 데이터베이스에 반영하시겠습니까?`)) {
         return;
     }
