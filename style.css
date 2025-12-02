@@ -257,33 +257,48 @@ body {
 }
 
 /* ==================================== */
-/* 9. 편집 기능 관련 스타일 - ✨ 최종 너비 고정 해결 (배경색으로 포커스 대체) ✨ */
+/* 9. 편집 기능 관련 스타일 - ✨ 너비 늘어남 현상 최종 해결 코드 ✨ */
 /* ==================================== */
 
+/* 편집 셀 (td)에 기준점 설정 */
+.data-table td {
+    /* 기존 스타일 유지하면서 position 속성 추가 */
+    border-bottom: 1px solid var(--color-border);
+    border-right: 1px solid var(--color-border);
+    padding: 14px 18px; /* 기존 패딩 유지 */
+    text-align: right;
+    transition: background-color 0.1s;
+    
+    /* 너비 고정의 핵심: input의 absolute 배치를 위한 기준점 */
+    position: relative; 
+}
+
+/* 수정된 셀 배경색 */
 .data-table td.modified {
-    /* 수정된 셀 배경색은 그대로 유지 */
     background-color: #FFF9C4;
     border: 1px solid #FFC107 !important;
 }
 
 .data-table td input.editable-input {
-    /* ------------------------------------------------------------- */
-    /* 너비 고정의 최종 해결 코드 */
-    width: 100%; 
-    padding: 0; 
-    margin: 0;
-    border: none; /* input 자체의 모든 테두리 제거 */
-    outline: none; /* input 자체의 포커스 윤곽선 제거 */
-    /* ------------------------------------------------------------- */
+    /* --------------------------------------------------------------------------------- */
+    /* 너비 문제 최종 해결: 셀 내부에 절대적으로 배치하여 패딩/보더를 무시하고 셀 너비를 채움 */
+    position: absolute; /* 셀(td)의 relative 위치를 기준으로 함 */
+    top: 1px;           /* 셀 경계선과 맞추기 위해 약간 조정 */
+    left: 1px;
+    width: calc(100% - 2px); /* 셀 너비에서 좌우 1px씩 여백을 줘서 테두리가 안 겹치게 함 */
+    height: calc(100% - 2px); /* 셀 높이에서 상하 1px씩 여백을 줌 */
     
+    padding: 5px;       /* 텍스트 입력 공간을 확보 */
+    margin: 0;
+    border: 1px solid var(--color-primary); /* 편집 중임을 명확히 표시 */
     text-align: right;
     box-sizing: border-box; 
     font-size: 14px;
-    height: 100%;
     
-    /* 포커스 시 배경색을 연한 노란색으로 변경하여 편집 모드임을 시각적으로 표시 */
-    background-color: #fffde7; 
+    /* input 활성화 시 배경색을 연하게 변경하여 포커스 강조 */
+    background-color: #ffffff; 
     transition: background-color 0.2s; 
+    /* --------------------------------------------------------------------------------- */
 }
 
 /* 스피너 숨김은 그대로 유지 */
@@ -295,6 +310,7 @@ body {
 .data-table td input.editable-input[type=number] {
     -moz-appearance: textfield;
 }
+
 
 /* ==================================== */
 /* 10. 메시지 스타일 */
