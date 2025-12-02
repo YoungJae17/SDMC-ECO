@@ -68,13 +68,12 @@ body {
 }
 
 /* ==================================== */
-/* 4. 컨테이너 스타일 (Container) - (공백 제거: 상단 마진 0) */
+/* 4. 컨테이너 스타일 (Container) - (공백 제거 수정) */
 /* ==================================== */
 .container {
     width: 95%;
     max-width: 1400px;
-    margin: 0 auto 30px auto;
-    /* 상단 마진을 0으로 설정하여 헤더 아래에 붙임 */
+    margin: -1px auto 30px auto; /* <--- 공백 제거를 위해 -1px로 수정 */
 
     padding: 30px;
     position: relative;
