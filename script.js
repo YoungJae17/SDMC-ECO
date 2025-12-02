@@ -67,7 +67,7 @@ async function showData() {
                     <button id="save-all-button" class="edit-button" disabled>변경 사항 저장</button>
                 </div>
             </div>
-            <p style="font-size: 13px; color: #666; margin-bottom: 15px;">💡 값을 **더블클릭**하여 수정할 수 있습니다. 수정한 후에는 **'변경 사항 저장'** 버튼을 누르세요.</p>
+            <p style="font-size: 13px; color: #666; margin-bottom: 15px;">💡 값을 '더블클릭'하여 수정할 수 있습니다. 수정 후 '변경 사항 저장' 버튼을 누르세요.</p>
             <table class="data-table">
                 <caption>${site} (${year}년) 월별 에너지 및 탄소 배출 현황</caption>
                 <thead>
