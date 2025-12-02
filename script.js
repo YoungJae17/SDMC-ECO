@@ -52,7 +52,7 @@ async function showData() {
         if (error) throw error;
 
         if (!energyData || energyData.length === 0) {
-            dataContainer.innerHTML = `<div class="loading-message error">🚨 **${site} ${year}년** 데이터가 없습니다.</div>`;
+            dataContainer.innerHTML = `<div class="loading-message error">🚨 ${site} ${year}년 데이터가 없습니다.</div>`;
             return;
         }
 
