@@ -1,37 +1,25 @@
-/* style.css - 에너지 대시보드 UI 최종 버전 (공백 제거 및 표 디자인 개선) */
+/* style.css - 디자인 개선 버전 (청록색 계열, 그림자 강조, 테이블 스타일 변경) */
 
 /* ==================================== */
-/* 1. CSS 변수 (Variable Definitions) */
+/* 1. CSS 변수 (Variable Definitions) - 청록색 계열로 변경 */
 /* ==================================== */
 :root {
-    --color-primary: #38761d;
-    /* 짙은 녹색 - 헤더, 주요 버튼 */
-    --color-secondary: #93c47d;
-    /* 연한 녹색 - 강조, 호버 배경 */
-    --color-accent: #e57373;
-    /* 적색 계열 - 마이너스/경고 표시 */
-    --color-positive: #66bb6a;
-    /* 녹색 계열 - 플러스/절감 표시 */
-    --color-background: #f1f8e9;
-    /* 아주 연한 녹색 배경 */
-    --color-text: #333;
-    /* 기본 텍스트 색상 */
-    --color-light-text: #666;
-    /* 보조 텍스트 색상 */
-    --color-border: #ccc;
-    /* 일반 경계선 색상 */
-    --color-card-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    /* 카드 그림자 */
-    --color-table-header: #ffffff;
-    /* (수정) 테이블 헤더 배경색을 흰색으로 변경 */
-    --color-table-header-text: #333;
-    /* (수정) 테이블 헤더 텍스트 색상을 검은색 계열로 변경 */
-    --color-table-row-hover: #f9f9f9;
-    /* 테이블 행 호버 배경색 */
+    --color-primary: #00897B; /* 진한 청록색 (Teal) */
+    --color-secondary: #00BCD4; /* 밝은 청록색 */
+    --color-accent: #E57373; /* 적색 계열 - 마이너스/경고 표시 유지 */
+    --color-positive: #4CAF50; /* 녹색 계열 - 플러스/절감 표시 */
+    --color-background: #f4f7f6; /* 아주 연한 회색 배경 */
+    --color-text: #333; /* 기본 텍스트 색상 */
+    --color-light-text: #666; /* 보조 텍스트 색상 */
+    --color-border: #E0E0E0; /* 아주 연한 경계선 색상 */
+    --color-card-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* 그림자 강조 */
+    --color-table-header: #E0F2F1; /* 헤더 배경 연한 청록색 */
+    --color-table-header-text: #00695C; /* 헤더 텍스트 진한 청록색 */
+    --color-table-row-hover: #FAFAFA; /* 테이블 행 호버 배경색 (아주 연한 회색) */
 }
 
 /* ==================================== */
-/* 2. 기본 스타일 (Base Styles) - (공백 제거: body 마진 0) */
+/* 2. 기본 스타일 (Base Styles) */
 /* ==================================== */
 * {
     box-sizing: border-box;
@@ -45,7 +33,6 @@ body {
     color: var(--color-text);
     line-height: 1.6;
     margin-top: 0;
-    /* 브라우저 기본 마진 제거 */
 }
 
 /* ==================================== */
@@ -54,34 +41,32 @@ body {
 .eco-header {
     background-color: var(--color-primary);
     color: white;
-    padding: 25px 0;
+    padding: 30px 0; /* 패딩 증가 */
     text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     position: relative;
     z-index: 10;
 }
 
 .eco-header h1 {
     font-weight: 700;
-    margin-bottom: 0;
-    font-size: 32px;
+    margin-bottom: 5px;
+    font-size: 34px; /* 폰트 크기 증가 */
 }
 
 /* ==================================== */
-/* 4. 컨테이너 스타일 (Container) - (공백 제거 수정) */
+/* 4. 컨테이너 스타일 (Container) - 그림자 및 곡선 강조 */
 /* ==================================== */
 .container {
     width: 95%;
     max-width: 1400px;
-    margin: -1px auto 30px auto; /* <--- 공백 제거를 위해 -1px로 수정 */
-
+    margin: -1px auto 30px auto;
     padding: 30px;
     position: relative;
     z-index: 5;
     background-color: #fff;
-    border-radius: 0 0 12px 12px;
-    /* 상단 모서리 둥글게 제거 */
-    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 0 0 16px 16px; /* 모서리 곡선 강조 */
+    box-shadow: var(--color-card-shadow); /* 그림자 강조 */
 }
 
 /* ==================================== */
@@ -132,22 +117,17 @@ body {
     padding: 10px 0;
 }
 
-.control-group {
-    display: flex;
-    align-items: center;
-}
-
 .controls label {
     font-weight: 500;
     margin-right: 10px;
-    color: var(--color-light-text);
+    color: var(--color-primary); /* 레이블 색상 강조 */
 }
 
 .controls select,
 .controls input[type="text"] {
     padding: 10px 15px;
     border: 1px solid var(--color-border);
-    border-radius: 6px;
+    border-radius: 8px; /* 모서리 둥글게 */
     background-color: white;
     font-size: 15px;
     cursor: pointer;
@@ -158,7 +138,7 @@ body {
 .controls select:focus,
 .controls input:focus {
     border-color: var(--color-primary);
-    box-shadow: 0 0 0 2px rgba(56, 118, 29, 0.2);
+    box-shadow: 0 0 0 3px rgba(0, 137, 123, 0.3); /* 포커스 효과 강조 */
     outline: none;
 }
 
@@ -175,7 +155,7 @@ body {
 }
 
 .table-title {
-    font-size: 20px;
+    font-size: 22px; /* 폰트 크기 증가 */
     font-weight: 700;
     color: var(--color-primary);
 }
@@ -186,37 +166,41 @@ body {
 }
 
 .edit-button {
-    padding: 8px 15px;
-    font-size: 14px;
+    padding: 10px 18px; /* 패딩 증가 */
+    font-size: 15px;
     font-weight: 600;
     cursor: pointer;
-    border: 1px solid var(--color-primary);
+    border: none; /* 테두리 제거 */
     background-color: var(--color-primary);
     color: white;
-    border-radius: 5px;
-    transition: background-color 0.2s;
+    border-radius: 6px;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+/* 저장 버튼에 아이콘 추가 (CSS로 직접 구현 불가, JS에서 텍스트 변경 권장) */
+.edit-button:before {
+    content: "💾 "; /* 임시 아이콘 */
 }
 
 .edit-button:hover:not([disabled]) {
-    background-color: #2e6018;
-    /* 더 어두운 녹색 */
-    border-color: #2e6018;
+    background-color: #00695C; /* 더 진한 청록색 */
+    transform: translateY(-1px); /* 약간 띄우는 효과 */
 }
 
 .edit-button[disabled] {
-    opacity: 0.6;
+    opacity: 0.5;
     cursor: not-allowed;
+    background-color: var(--color-light-text);
 }
 
 /* ==================================== */
-/* 8. 테이블 스타일 (Data Table) - (표 디자인 수정) */
+/* 8. 테이블 스타일 (Data Table) - 가로줄만 남기고 깔끔하게 수정 */
 /* ==================================== */
 
 #data-display {
     overflow-x: hidden;
-    border: 1px solid var(--color-border);
+    border: none; /* 전체 테두리 제거 */
     border-radius: 8px;
-    /* 표 제목과 표 사이에 불필요한 공백 제거를 위해 margin-top 조정 */
     margin-top: -1px;
 }
 
@@ -225,33 +209,32 @@ body {
     border-collapse: collapse;
     margin-top: 0;
     font-size: 14px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* 테이블 자체에 은은한 그림자 */
 }
 
 .data-table th,
 .data-table td {
     border: none;
-    border-bottom: 1px solid var(--color-border);
-    padding: 12px 18px;
+    border-bottom: 1px solid var(--color-border); /* 가로줄만 남김 */
+    padding: 14px 18px; /* 패딩 증가 */
     text-align: right;
+    transition: background-color 0.1s;
 }
 
 .data-table thead th {
-    background-color: var(--color-table-header);
-    /* 흰색으로 변경 */
-    color: var(--color-table-header-text);
-    /* 검은색 계열로 변경 */
-    font-weight: 600;
+    background-color: var(--color-table-header); /* 연한 청록색 배경 */
+    color: var(--color-table-header-text); /* 진한 청록색 텍스트 */
+    font-weight: 700;
     text-align: center;
     vertical-align: middle;
-    border-bottom: 2px solid var(--color-secondary);
+    border-bottom: 3px solid var(--color-primary); /* 헤더 하단에 굵은 선 */
 }
 
-/* 월(month) 컬럼 배경색 수정 */
+/* 월(month) 컬럼 배경색 및 폰트 강조 */
 .data-table tbody td:first-child {
     text-align: left;
     background-color: #ffffff;
-    /* 흰색으로 변경 */
-    font-weight: 600;
+    font-weight: 700; /* 폰트 굵기 강조 */
     color: var(--color-primary);
 }
 
@@ -266,10 +249,8 @@ body {
 
 /* 수정된 셀 시각적 표시 */
 .data-table td.modified {
-    background-color: #fff9c4;
-    /* 아주 연한 노란색 배경 */
-    border: 1px dashed #fdd835 !important;
-    /* 노란색 점선 테두리 */
+    background-color: #FFF9C4; /* 연한 노란색 배경 */
+    border: 1px solid #FFC107 !important; /* 노란색 실선 테두리 */
 }
 
 /* 편집 중인 input 필드 스타일 (스피너 제거) */
@@ -277,23 +258,19 @@ body {
     width: 100%;
     padding: 5px;
     margin: 0;
-    border: 1px solid #38761d;
-    /* primary color 테두리 */
+    border: 1px solid var(--color-primary);
     text-align: right;
     box-sizing: border-box;
     font-size: 14px;
     height: 100%;
-    /* 셀 높이에 맞춤 */
 }
 
-/* **[핵심]** 1. Chrome, Safari, Edge에서 스피너 버튼 숨기기 */
+/* 스피너 숨기기 */
 .data-table td input.editable-input::-webkit-outer-spin-button,
 .data-table td input.editable-input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
-
-/* **[핵심]** 2. Firefox에서 스피너 버튼 숨기기 */
 .data-table td input.editable-input[type=number] {
     -moz-appearance: textfield;
 }
@@ -320,14 +297,13 @@ body {
     .container {
         width: 100%;
         margin: 0;
-        /* 상단 마진 0 */
         padding: 15px;
         border-radius: 0;
         box-shadow: none;
     }
 
     .eco-header h1 {
-        font-size: 26px;
+        font-size: 24px;
     }
 
     /* 2. 컨트롤 및 버튼 조정 */
