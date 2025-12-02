@@ -1,4 +1,4 @@
-/* style.css - 가독성 개선 최종 버전 (세로선 복원 및 선 색상 조정) */
+/* style.css - 헤더 스타일 개선 및 가독성 좋은 최종 버전 */
 
 /* ==================================== */
 /* 1. CSS 변수 (Variable Definitions) */
@@ -11,9 +11,9 @@
     --color-background: #F8F9FA; /* 아주 밝은 회색 배경 */
     --color-text: #333;
     --color-light-text: #6c757d;
-    --color-border: #D1D9E0; /* 선명한 구분을 위해 연하지만 눈에 띄는 회색 */
+    --color-border: #D1D9E0; /* 테이블 선 색상 */
     --color-card-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    --color-table-header: var(--color-secondary); /* 테이블 헤더 배경색에 색상 적용 */
+    --color-table-header: var(--color-secondary);
     --color-table-header-text: #333;
     --color-table-row-hover: #F2F7F0;
 }
@@ -36,25 +36,27 @@ body {
 }
 
 /* ==================================== */
-/* 3. 헤더 스타일 (Header Styles) */
+/* 3. 헤더 스타일 (Header Styles) - ✨ 제목 스타일 집중 개선 영역 ✨ */
 /* ==================================== */
 .eco-header {
     background-color: var(--color-primary);
     color: white;
-    padding: 30px 0;
+    padding: 35px 0; /* 패딩을 늘려 높이 확보 */
     text-align: center;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4); /* 그림자 더 선명하게 */
     position: relative;
     z-index: 10;
 }
 
 .eco-header h1 {
-    font-weight: 700;
+    font-weight: 900; /* 가장 굵은 폰트 두께 (블랙) 사용 */
     margin-bottom: 5px;
-    font-size: 34px;
+    font-size: 38px; /* 폰트 크기 대폭 증가 */
+    letter-spacing: -1px; /* 글자 간격 조정하여 꽉 찬 느낌 */
 }
 .eco-header p {
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(255, 255, 255, 0.85); /* 부제목 색상 연하게 */
+    font-weight: 500;
 }
 
 /* ==================================== */
@@ -186,12 +188,12 @@ body {
 }
 
 /* ==================================== */
-/* 8. 테이블 스타일 (Data Table) - 가로/세로선 복원 및 가독성 개선 */
+/* 8. 테이블 스타일 (Data Table) - 가로/세로선 유지 */
 /* ==================================== */
 
 #data-display {
     overflow-x: hidden;
-    border: 1px solid var(--color-border); /* 테이블 전체 테두리 */
+    border: 1px solid var(--color-border);
     border-radius: 8px;
     margin-top: -1px;
 }
@@ -206,14 +208,13 @@ body {
 
 .data-table th,
 .data-table td {
-    border-bottom: 1px solid var(--color-border); /* 가로선 */
-    border-right: 1px solid var(--color-border); /* 세로선 복원 */
+    border-bottom: 1px solid var(--color-border);
+    border-right: 1px solid var(--color-border);
     padding: 14px 18px;
     text-align: right;
     transition: background-color 0.1s;
 }
 
-/* 마지막 열의 오른쪽 테두리 제거 */
 .data-table th:last-child,
 .data-table td:last-child {
     border-right: none;
@@ -225,10 +226,9 @@ body {
     font-weight: 700;
     text-align: center;
     vertical-align: middle;
-    border-bottom: 3px solid var(--color-primary);
+    border-bottom: 3px solid var(--color-primary); /* 강조 선 */
 }
 
-/* 월(month) 컬럼 강조 */
 .data-table tbody td:first-child {
     text-align: left;
     background-color: #ffffff;
@@ -244,7 +244,6 @@ body {
 /* ==================================== */
 /* 9. 편집 기능 관련 스타일 */
 /* ==================================== */
-
 .data-table td.modified {
     background-color: #FFF9C4;
     border: 1px solid #FFC107 !important;
@@ -295,7 +294,7 @@ body {
 /* ==================================== */
 
 @media (max-width: 768px) {
-    /* (반응형 코드는 가독성을 위해 이전과 동일하게 유지됩니다.) */
+    
     .container {
         width: 100%;
         margin: 0;
@@ -305,7 +304,7 @@ body {
     }
 
     .eco-header h1 {
-        font-size: 24px;
+        font-size: 28px; /* 모바일에서 폰트 크기 조정 */
     }
 
     .controls {
