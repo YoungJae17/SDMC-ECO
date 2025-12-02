@@ -1,21 +1,21 @@
-/* style.css - 초록색 테마 유지 및 디자인 개선 버전 */
+/* style.css - 디자인 1: 모던 클린 (Modern Clean) 버전 */
 
 /* ==================================== */
 /* 1. CSS 변수 (Variable Definitions) - 기존 녹색 테마 유지 */
 /* ==================================== */
 :root {
-    --color-primary: #38761d; /* 짙은 녹색 (기존 유지) */
-    --color-secondary: #93c47d; /* 연한 녹색 (기존 유지) */
-    --color-accent: #e57373; /* 적색 계열 - 마이너스/경고 표시 */
-    --color-positive: #66bb6a; /* 녹색 계열 - 플러스/절감 표시 */
-    --color-background: #F8F9FA; /* 아주 밝은 회색 배경으로 변경 (컨테이너 대비 극대화) */
+    --color-primary: #38761d; /* 짙은 녹색 */
+    --color-secondary: #93c47d; /* 연한 녹색 */
+    --color-accent: #e57373;
+    --color-positive: #66bb6a;
+    --color-background: #F8F9FA; /* 아주 밝은 회색 배경 */
     --color-text: #333;
-    --color-light-text: #6c757d; /* 보조 텍스트는 약간 어두운 회색으로 변경 */
+    --color-light-text: #6c757d;
     --color-border: #E9ECEF; /* 매우 연한 경계선 색상 */
-    --color-card-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* 그림자 강조 */
-    --color-table-header: #EBF2E8; /* 헤더 배경 연한 녹색 */
-    --color-table-header-text: #38761d; /* 헤더 텍스트 짙은 녹색 */
-    --color-table-row-hover: #F2F7F0; /* 테이블 행 호버 배경색 */
+    --color-card-shadow: 0 12px 30px rgba(0, 0, 0, 0.1); /* 그림자 강조 */
+    --color-table-header: #FFFFFF; /* 헤더 배경 흰색 */
+    --color-table-header-text: #333; /* 헤더 텍스트는 일반 검은색 */
+    --color-table-row-hover: #F2F7F0;
 }
 
 /* ==================================== */
@@ -41,9 +41,9 @@ body {
 .eco-header {
     background-color: var(--color-primary);
     color: white;
-    padding: 30px 0; /* 패딩 증가 */
+    padding: 30px 0;
     text-align: center;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* 그림자 더 강조 */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     position: relative;
     z-index: 10;
 }
@@ -54,21 +54,21 @@ body {
     font-size: 34px;
 }
 .eco-header p {
-    color: rgba(255, 255, 255, 0.9); /* 부제목 색상 연하게 */
+    color: rgba(255, 255, 255, 0.9);
 }
 
 /* ==================================== */
-/* 4. 컨테이너 스타일 (Container) - 그림자 및 곡선 강조 */
+/* 4. 컨테이너 스타일 (Container) - 카드형 레이아웃 강조 */
 /* ==================================== */
 .container {
     width: 95%;
     max-width: 1400px;
-    margin: -1px auto 40px auto; /* 상단 공백 제거 및 하단 마진 증가 */
+    margin: -1px auto 40px auto;
     padding: 30px;
     position: relative;
     z-index: 5;
     background-color: #fff;
-    border-radius: 0 0 16px 16px; /* 모서리 곡선 강조 */
+    border-radius: 0 0 16px 16px; 
     box-shadow: var(--color-card-shadow); /* 그림자 강조 */
 }
 
@@ -77,7 +77,7 @@ body {
 /* ==================================== */
 .page-navigation {
     margin-bottom: 30px;
-    border-bottom: 1px solid var(--color-border); /* 얇은 구분선 */
+    border-bottom: 1px solid var(--color-border);
     padding-bottom: 0;
     display: flex;
     gap: 5px;
@@ -92,7 +92,7 @@ body {
     background-color: transparent;
     color: var(--color-light-text);
     border-radius: 8px 8px 0 0;
-    margin-bottom: -1px; /* 탭과 선이 붙도록 조정 */
+    margin-bottom: -1px;
     transition: all 0.2s;
 }
 
@@ -118,20 +118,20 @@ body {
     margin-bottom: 20px;
     align-items: center;
     padding: 10px 0;
-    border-bottom: 1px dashed var(--color-border); /* 컨트롤 영역 구분선 */
+    border-bottom: 1px dashed var(--color-border);
 }
 
 .controls label {
-    font-weight: 600; /* 레이블 굵게 */
+    font-weight: 600;
     margin-right: 10px;
-    color: var(--color-primary);
+    color: var(--color-text); /* 레이블 색상은 일반 텍스트 */
 }
 
 .controls select,
 .controls input[type="text"] {
     padding: 10px 15px;
     border: 1px solid var(--color-border);
-    border-radius: 8px;
+    border-radius: 8px; /* 둥근 모서리 */
     background-color: white;
     font-size: 15px;
     cursor: pointer;
@@ -160,7 +160,7 @@ body {
 .table-title {
     font-size: 22px;
     font-weight: 700;
-    color: var(--color-text); /* 제목은 검은색 계열로 변경 */
+    color: var(--color-text);
 }
 
 .table-actions {
@@ -185,7 +185,7 @@ body {
 }
 
 .edit-button:hover:not([disabled]) {
-    background-color: #2e6018; /* 더 어두운 녹색 */
+    background-color: #2e6018;
     transform: translateY(-1px);
 }
 
@@ -196,7 +196,7 @@ body {
 }
 
 /* ==================================== */
-/* 8. 테이블 스타일 (Data Table) - 가로줄만 남기고 깔끔하게 수정 */
+/* 8. 테이블 스타일 (Data Table) - 모던 클린 스타일 적용 */
 /* ==================================== */
 
 #data-display {
@@ -214,22 +214,23 @@ body {
     background-color: white;
 }
 
+/* 테이블의 테두리 및 구분선 최소화 */
 .data-table th,
 .data-table td {
     border: none;
-    border-bottom: 1px solid var(--color-border); /* 가로줄만 남김 */
+    border-bottom: 1px solid var(--color-border); /* 연한 가로줄만 남김 */
     padding: 14px 18px;
     text-align: right;
     transition: background-color 0.1s;
 }
 
 .data-table thead th {
-    background-color: var(--color-table-header); /* 연한 녹색 배경 */
-    color: var(--color-table-header-text); /* 짙은 녹색 텍스트 */
+    background-color: var(--color-table-header); /* 흰색 배경 */
+    color: var(--color-table-header-text); /* 짙은 텍스트 */
     font-weight: 700;
     text-align: center;
     vertical-align: middle;
-    border-bottom: 3px solid var(--color-primary); /* 헤더 하단에 굵은 선 */
+    border-bottom: 3px solid var(--color-secondary); /* 연한 녹색 굵은 선으로 구분 */
 }
 
 /* 월(month) 컬럼 배경색 및 폰트 강조 */
@@ -237,7 +238,7 @@ body {
     text-align: left;
     background-color: #ffffff;
     font-weight: 700;
-    color: var(--color-text);
+    color: var(--color-primary); /* 월 표시는 브랜드 색상으로 강조 */
 }
 
 .data-table tbody tr:hover {
@@ -299,7 +300,7 @@ body {
 /* ==================================== */
 
 @media (max-width: 768px) {
-
+    /* (반응형 코드는 가독성을 위해 이전과 동일하게 유지됩니다.) */
     .container {
         width: 100%;
         margin: 0;
