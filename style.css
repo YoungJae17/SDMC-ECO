@@ -1,17 +1,17 @@
-/* style.css - 헤더 스타일 개선 및 가독성 좋은 최종 버전 */
+/* style.css - 표 제목 밑줄 조정 및 최종 가독성 버전 */
 
 /* ==================================== */
 /* 1. CSS 변수 (Variable Definitions) */
 /* ==================================== */
 :root {
-    --color-primary: #38761d; /* 짙은 녹색 (헤더) */
-    --color-secondary: #93c47d; /* 연한 녹색 (테이블 헤더 배경) */
+    --color-primary: #38761d; /* 짙은 녹색 (헤더, 버튼) */
+    --color-secondary: #c9e5b9; /* ✨ 더 옅은 녹색 (테이블 헤더 배경) */
     --color-accent: #e57373;
     --color-positive: #66bb6a;
-    --color-background: #F8F9FA; /* 아주 밝은 회색 배경 */
+    --color-background: #F8F9FA;
     --color-text: #333;
     --color-light-text: #6c757d;
-    --color-border: #D1D9E0; /* 테이블 선 색상 */
+    --color-border: #D1D9E0; /* 테이블 선 색상 (가로/세로/밑줄) */
     --color-card-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     --color-table-header: var(--color-secondary);
     --color-table-header-text: #333;
@@ -36,26 +36,26 @@ body {
 }
 
 /* ==================================== */
-/* 3. 헤더 스타일 (Header Styles) - ✨ 제목 스타일 집중 개선 영역 ✨ */
+/* 3. 헤더 스타일 (Header Styles) */
 /* ==================================== */
 .eco-header {
     background-color: var(--color-primary);
     color: white;
-    padding: 35px 0; /* 패딩을 늘려 높이 확보 */
+    padding: 35px 0;
     text-align: center;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4); /* 그림자 더 선명하게 */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
     position: relative;
     z-index: 10;
 }
 
 .eco-header h1 {
-    font-weight: 900; /* 가장 굵은 폰트 두께 (블랙) 사용 */
+    font-weight: 900;
     margin-bottom: 5px;
-    font-size: 38px; /* 폰트 크기 대폭 증가 */
-    letter-spacing: -1px; /* 글자 간격 조정하여 꽉 찬 느낌 */
+    font-size: 38px;
+    letter-spacing: -1px;
 }
 .eco-header p {
-    color: rgba(255, 255, 255, 0.85); /* 부제목 색상 연하게 */
+    color: rgba(255, 255, 255, 0.85);
     font-weight: 500;
 }
 
@@ -188,7 +188,7 @@ body {
 }
 
 /* ==================================== */
-/* 8. 테이블 스타일 (Data Table) - 가로/세로선 유지 */
+/* 8. 테이블 스타일 (Data Table) - ✨ 밑줄 변경 영역 ✨ */
 /* ==================================== */
 
 #data-display {
@@ -226,7 +226,10 @@ body {
     font-weight: 700;
     text-align: center;
     vertical-align: middle;
-    border-bottom: 3px solid var(--color-primary); /* 강조 선 */
+    /* ------------------------------------------------------------------ */
+    /* 🚨 굵은 녹색 밑줄을 연한 회색 실선으로 변경 (가독성 개선) */
+    border-bottom: 1px solid var(--color-border); 
+    /* ------------------------------------------------------------------ */
 }
 
 .data-table tbody td:first-child {
@@ -304,7 +307,7 @@ body {
     }
 
     .eco-header h1 {
-        font-size: 28px; /* 모바일에서 폰트 크기 조정 */
+        font-size: 28px;
     }
 
     .controls {
