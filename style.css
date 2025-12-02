@@ -1,25 +1,26 @@
-/* style.css - 표 제목 밑줄 조정 및 최종 가독성 버전 */
+/* style.css - 에코 그린 테마 (Eco Green) 적용 버전 */
 
 /* ==================================== */
-/* 1. CSS 변수 (Variable Definitions) */
+/* 1. CSS 변수 (Variable Definitions) - ✨ 에코 그린 색상 적용 영역 ✨ */
 /* ==================================== */
 :root {
-    --color-primary: #38761d; /* 짙은 녹색 (헤더, 버튼) */
-    --color-secondary: #c9e5b9; /* ✨ 더 옅은 녹색 (테이블 헤더 배경) */
-    --color-accent: #e57373;
-    --color-positive: #66bb6a;
-    --color-background: #F8F9FA;
+    --color-primary: #4CAF50; /* 메인 강조색: 에코 그린 */
+    --color-secondary: #E8F5E9; /* 테이블 헤더 배경: 아주 연한 에코 그린 */
+    --color-accent: #e57373; /* 경고/마이너스 */
+    --color-positive: #66bb6a; /* 플러스/절감 */
+    --color-background: #F8F9FA; /* 배경 */
     --color-text: #333;
     --color-light-text: #6c757d;
-    --color-border: #D1D9E0; /* 테이블 선 색상 (가로/세로/밑줄) */
+    --color-border: #D1D9E0; /* 테이블 선 색상 */
     --color-card-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
     --color-table-header: var(--color-secondary);
     --color-table-header-text: #333;
-    --color-table-row-hover: #F2F7F0;
+    --color-table-row-hover: #F1F8E9; /* 행 호버 배경 */
 }
 
 /* ==================================== */
 /* 2. 기본 스타일 (Base Styles) */
+/* (이하 코드는 디자인 구조 유지를 위해 이전과 동일합니다.) */
 /* ==================================== */
 * {
     box-sizing: border-box;
@@ -39,7 +40,7 @@ body {
 /* 3. 헤더 스타일 (Header Styles) */
 /* ==================================== */
 .eco-header {
-    background-color: var(--color-primary);
+    background-color: var(--color-primary); /* 에코 그린 적용 */
     color: white;
     padding: 35px 0;
     text-align: center;
@@ -100,9 +101,9 @@ body {
 
 .page-navigation .active-button {
     background-color: #fff;
-    color: var(--color-primary);
+    color: var(--color-primary); /* 에코 그린 적용 */
     font-weight: 700;
-    border-bottom: 3px solid var(--color-primary);
+    border-bottom: 3px solid var(--color-primary); /* 에코 그린 적용 */
 }
 
 /* ==================================== */
@@ -138,8 +139,8 @@ body {
 
 .controls select:focus,
 .controls input:focus {
-    border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgba(56, 118, 29, 0.3);
+    border-color: var(--color-primary); /* 에코 그린 적용 */
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3);
     outline: none;
 }
 
@@ -166,7 +167,7 @@ body {
     font-weight: 600;
     cursor: pointer;
     border: none;
-    background-color: var(--color-primary);
+    background-color: var(--color-primary); /* 에코 그린 적용 */
     color: white;
     border-radius: 8px;
     transition: background-color 0.2s, transform 0.1s;
@@ -177,7 +178,7 @@ body {
 }
 
 .edit-button:hover:not([disabled]) {
-    background-color: #2e6018;
+    background-color: #388E3C; /* 에코 그린 Hover 색상 */
     transform: translateY(-1px);
 }
 
@@ -188,7 +189,7 @@ body {
 }
 
 /* ==================================== */
-/* 8. 테이블 스타일 (Data Table) - ✨ 밑줄 변경 영역 ✨ */
+/* 8. 테이블 스타일 (Data Table) */
 /* ==================================== */
 
 #data-display {
@@ -221,15 +222,12 @@ body {
 }
 
 .data-table thead th {
-    background-color: var(--color-table-header);
+    background-color: var(--color-table-header); /* 아주 연한 에코 그린 적용 */
     color: var(--color-table-header-text);
     font-weight: 700;
     text-align: center;
     vertical-align: middle;
-    /* ------------------------------------------------------------------ */
-    /* 🚨 굵은 녹색 밑줄을 연한 회색 실선으로 변경 (가독성 개선) */
-    border-bottom: 1px solid var(--color-border); 
-    /* ------------------------------------------------------------------ */
+    border-bottom: 1px solid var(--color-border);
 }
 
 .data-table tbody td:first-child {
@@ -240,7 +238,7 @@ body {
 }
 
 .data-table tbody tr:hover {
-    background-color: var(--color-table-row-hover);
+    background-color: var(--color-table-row-hover); /* 행 호버 배경 에코 그린 적용 */
     cursor: default;
 }
 
@@ -256,7 +254,7 @@ body {
     width: 100%;
     padding: 5px;
     margin: 0;
-    border: 1px solid var(--color-primary);
+    border: 1px solid var(--color-primary); /* 에코 그린 적용 */
     text-align: right;
     box-sizing: border-box;
     font-size: 14px;
