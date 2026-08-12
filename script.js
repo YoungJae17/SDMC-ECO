@@ -12,12 +12,11 @@ const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_
 let currentData = [];
 let originalData = {}; // {row_id: {column: value, ...}} 원본 데이터
 let modifiedCells = {}; // {row_id: {column: new_value, ...}} 변경된 데이터 임시 저장
-let lastTouchTime = 0; // 🚨 [추가] 모바일 더블 탭 감지를 위한 변수
+let lastTouchTime = 0; // 🚨 모바일 더블 탭 감지를 위한 변수
 
 // 숫자에 천 단위 쉼표를 넣어주는 함수
 function formatNumber(num) {
     if (num === null || num === undefined || isNaN(num)) return '-';
-    // 탄소 배출량처럼 소수점 이하가 필요한 경우를 위해 toLocaleString 대신 직접 구현
     return String(num).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
@@ -34,7 +33,6 @@ async function showData() {
 
     // 변경사항이 남아있으면 경고
     if (Object.keys(modifiedCells).length > 0) {
-        // 기존 confirm() 사용
         if (!confirm("저장하지 않은 변경사항이 있습니다. 페이지를 다시 로드하시겠습니까?")) {
             return;
         }
@@ -44,7 +42,8 @@ async function showData() {
     dataContainer.innerHTML = `<div class="loading-message">데이터를 불러오는 중...</div>`;
 
     try {
-        const { data: energyData, error } = await supabase
+        // 🛠️ supabase -> supabaseClient 로 수정됨
+        const { data: energyData, error } = await supabaseClient
             .from('energy_data')
             .select('*')
             .eq('site_name', site)
@@ -89,11 +88,10 @@ async function showData() {
                 <tbody>
         `;
 
-        // 데이터 행을 추가합니다.
+        // 데이터 행 추가
         energyData.forEach(row => {
             const rowId = row.id;
             if (rowId) {
-                // 원본 데이터 저장
                 originalData[rowId] = {
                     elec_usage: row.elec_usage,
                     elec_cost: row.elec_cost,
@@ -119,10 +117,7 @@ async function showData() {
 
         // --- 이벤트 연결 ---
         document.querySelectorAll('.editable-cell').forEach(cell => {
-            // 1. 데스크톱용: 기존 dblclick 유지
             cell.addEventListener('dblclick', handleCellDblClick);
-            
-            // 2. 모바일용: touchstart 리스너 추가 (더블 탭 감지)
             cell.addEventListener('touchstart', handleDoubleTap);
         });
         document.getElementById('save-all-button').addEventListener('click', saveChanges);
@@ -140,97 +135,70 @@ async function showData() {
 }
 
 /**
- * 🚨 [추가] 모바일 더블 탭 처리를 위한 새로운 핸들러
- * 300ms 이내에 두 번 터치되었는지 확인하고 편집 모드를 시작합니다.
- * @param {Event} event 
+ * 모바일 더블 탭 처리 핸들러
  */
 function handleDoubleTap(event) {
-    // 1개 이상의 터치(멀티 터치)는 무시
     if (event.touches.length > 1) return; 
 
     const touchTime = new Date().getTime();
     
-    // 300ms(0.3초) 이내에 두 번째 탭이 들어왔는지 확인
     if (touchTime - lastTouchTime < 300) {
-        event.preventDefault(); // 더블 탭 시 확대/축소 방지 (CSS에서도 처리했지만 JS에서 한 번 더 보강)
+        event.preventDefault();
         const cell = event.currentTarget;
-        
-        // 더블 탭으로 인식되면 기존 더블 클릭 핸들러를 호출하여 편집 모드 시작
-        // dblclick 핸들러가 event.currentTarget을 기대하므로 객체를 만들어서 전달
         handleCellDblClick({ currentTarget: cell }); 
-        lastTouchTime = 0; // 초기화
+        lastTouchTime = 0;
     } else {
         lastTouchTime = touchTime;
     }
 }
 
-
 /**
- * 3. 셀 더블클릭 핸들러: TD를 INPUT으로 변환 (데스크톱 및 JS 호출용)
- * @param {Event} event - 더블클릭 이벤트 (또는 touchstart에 의해 모의된 이벤트 객체)
+ * 셀 더블클릭 핸들러: TD를 INPUT으로 변환
  */
 function handleCellDblClick(event) {
     const cell = event.currentTarget;
 
-    // 이미 편집 중인 셀이면 무시
     if (cell.querySelector('input')) return;
 
     const rowId = cell.closest('tr').dataset.id;
     const field = cell.dataset.field;
 
-    // 현재 표시된 텍스트(쉼표 제거)를 값으로 사용
     const initialValue = cell.textContent.replace(/,/g, '').replace(/-/g, '0');
 
-    // 입력 필드 생성
     const input = document.createElement('input');
     input.type = 'number';
-    input.step = (field === 'carbon_emission') ? '0.1' : '1'; // 탄소배출량은 소수점 허용
+    input.step = (field === 'carbon_emission') ? '0.1' : '1';
     input.value = initialValue;
     input.className = 'editable-input';
 
-    // 기존 텍스트 제거 및 input 추가
     cell.textContent = '';
     cell.appendChild(input);
     input.focus();
 
-    // 포커스를 잃었을 때 (다른 곳을 클릭하거나 탭 이동) 값 처리
     input.addEventListener('blur', () => handleInputBlur(input, cell, rowId, field));
-    // Enter 키를 눌렀을 때도 blur 이벤트와 동일하게 작동
     input.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
-            e.preventDefault(); // 폼 제출 방지
+            e.preventDefault();
             input.blur();
         }
     });
 }
 
 /**
- * 4. 입력 필드 포커스 아웃 핸들러: 값 비교 및 임시 저장
- * @param {HTMLInputElement} input - 입력 필드 요소
- * @param {HTMLElement} cell - TD 셀 요소
- * @param {string} rowId - 데이터베이스 행 ID
- * @param {string} field - 데이터베이스 컬럼 이름
+ * 입력 필드 포커스 아웃 핸들러
  */
 function handleInputBlur(input, cell, rowId, field) {
     const newValue = parseFloat(input.value);
-
-    // 원본 값 찾기: originalData에 저장된 값, 없으면 0
     let originalValue = originalData[rowId] ? originalData[rowId][field] : 0;
 
-    // 수정된 값으로 셀 업데이트 (쉼표 추가)
     cell.textContent = formatNumber(newValue);
-
-    // input 필드 제거
     input.remove();
 
-    // 값 변경 감지 및 임시 저장
     if (newValue !== originalValue && !isNaN(newValue)) {
-        // 변경된 값 임시 저장
         modifiedCells[rowId] = modifiedCells[rowId] || {};
         modifiedCells[rowId][field] = newValue;
-        cell.classList.add('modified'); // CSS로 변경된 셀 시각적 표시
+        cell.classList.add('modified');
     } else {
-        // 변경된 값이 없거나 원본으로 돌아갔으면 임시 저장 목록에서 제거
         if (modifiedCells[rowId]) {
             delete modifiedCells[rowId][field];
             if (Object.keys(modifiedCells[rowId]).length === 0) {
@@ -240,7 +208,6 @@ function handleInputBlur(input, cell, rowId, field) {
         cell.classList.remove('modified');
     }
 
-    // 저장 버튼 활성화/비활성화
     const saveButton = document.getElementById('save-all-button');
     if (Object.keys(modifiedCells).length > 0) {
         saveButton.disabled = false;
@@ -250,12 +217,11 @@ function handleInputBlur(input, cell, rowId, field) {
 }
 
 /**
- * 5. 변경 사항 저장 및 Supabase에 반영 (Save Button Click)
+ * 변경 사항 저장 및 Supabase에 반영
  */
 async function saveChanges() {
     const changesToSave = [];
 
-    // modifiedCells 객체를 업데이트 형식 배열로 변환
     for (const rowId in modifiedCells) {
         if (Object.keys(modifiedCells[rowId]).length > 0) {
             changesToSave.push({ id: rowId, ...modifiedCells[rowId] });
@@ -263,26 +229,23 @@ async function saveChanges() {
     }
 
     if (changesToSave.length === 0) {
-        // 기존 alert() 사용
         alert("변경된 데이터가 없습니다.");
         return;
     }
 
-    // 기존 confirm() 사용
     if (!confirm(`${changesToSave.length}건의 변경 사항을 데이터베이스에 반영하시겠습니까?`)) {
         return;
     }
 
-    // 2. 저장 상태 표시 및 버튼 비활성화
     const dataContainer = document.getElementById('data-display');
     const saveButton = document.getElementById('save-all-button');
     saveButton.disabled = true;
     dataContainer.insertAdjacentHTML('beforebegin', '<p id="save-status" style="color: #38761d; text-align: center; font-weight: bold;">데이터 저장 중...</p>');
 
-    // 3. Supabase 업데이트 쿼리 실행
+    // 🛠️ supabase -> supabaseClient 로 수정됨
     const updatePromises = changesToSave.map(change => {
         const { id, ...updateData } = change;
-        return supabase
+        return supabaseClient
             .from('energy_data')
             .update(updateData)
             .eq('id', id);
@@ -291,7 +254,6 @@ async function saveChanges() {
     const results = await Promise.all(updatePromises);
     document.getElementById('save-status').remove();
 
-    // 4. 결과 메시지 출력 및 상태 초기화
     const hasError = results.some(res => res.error);
     const messageColor = hasError ? 'red' : 'green';
     const messageText = hasError ?
@@ -300,17 +262,15 @@ async function saveChanges() {
 
     dataContainer.insertAdjacentHTML('beforebegin', `<p id="final-status" style="color: ${messageColor}; text-align: center; font-weight: bold;">${messageText}</p>`);
 
-    // 상태 초기화 후 데이터 새로고침
     modifiedCells = {};
     setTimeout(() => {
         const statusMsg = document.getElementById('final-status');
         if (statusMsg) statusMsg.remove();
-        showData(); // 데이터 새로고침 (최신 데이터 반영)
+        showData();
     }, 1500);
 }
 
-
-// --- 이벤트 리스너 설정: 페이지 로드 후 실행 ---
+// --- 이벤트 리스너 설정 ---
 document.addEventListener('DOMContentLoaded', () => {
     const siteSelect = document.getElementById('site-select');
     const yearSelect = document.getElementById('year-select');
