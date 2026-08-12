@@ -5,7 +5,8 @@ const SUPABASE_URL = 'https://sewmhqtmprbcofggbjfn.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNld21ocXRtcHJiY29mZ2diamZuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM0NjkwNDgsImV4cCI6MjA3OTA0NTA0OH0.31vxwOHkxkFKXFlEZYxS4nXQlwCPlD1tesHqj2dpAG0';
 // ---------------------------------------------------------------------------------
 
-const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+// 🛠️ 변수명 충돌 방지를 위해 supabase -> supabaseClient 로 수정
+const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 let myChart = null; // 차트 객체를 저장할 전역 변수
 
 // 🌟 Supabase에서 데이터를 가져와 차트를 그리는 함수
@@ -25,7 +26,8 @@ async function drawChart() {
     chartCanvas.style.display = 'none';
 
     try {
-        const { data: energyData, error } = await supabase
+        // 🛠️ supabase -> supabaseClient 로 수정
+        const { data: energyData, error } = await supabaseClient
             .from('energy_data')
             .select('*')
             .eq('site_name', site)
@@ -111,7 +113,6 @@ async function drawChart() {
         chartErrorDiv.style.display = 'block';
     }
 }
-
 
 // --- 이벤트 리스너 설정: 페이지 로드 후 실행 ---
 document.addEventListener('DOMContentLoaded', () => {
